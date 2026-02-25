@@ -1,0 +1,23 @@
+{
+    "le_setPos": "12000",
+    "le_setPos1": "1000",
+    "le_setPos2": "12000",
+    "le_setPos3": "45",
+    "cb_enable": true,
+    "cb_mode": true,
+    "radioButton": true,
+    "le_pwm": "4095",
+    "le_paP": "0.5",
+    "le_paD": "0.002",
+    "le_zeroShift": "0",
+    "lineEdit": "D          ",
+    "radioButton_2": false,
+    "lineEdit_2": "Qq",
+    "radioButton_3": false,
+    "lineEdit_3": "Angle",
+    "radioButton_4": true,
+    "lineEdit_4": "Set Pos",
+    "radioButton_5": true,
+    "lineEdit_5": "trajectory",
+    "le_speed": "9100"
+}
