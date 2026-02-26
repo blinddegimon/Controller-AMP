@@ -1,8 +1,9 @@
-from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread
+from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread, QObject, Signal
 from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton
 from PySide6.QtSerialPort import QSerialPort
 from PySide6.QtGui import QShortcut
 
+from plot import CustomViewBox
 from ui_mainwindow import Ui_MainWindow
 from settingsdialog import SettingsDialog
 import pyqtgraph as pg
@@ -10,6 +11,7 @@ import numpy as np
 import array
 import json
 import plot as plt
+import time
 
 BUFFER_SIZE = 1000
 
@@ -24,6 +26,24 @@ def description(s):
             f"{s.string_data_bits}, {s.string_parity}, {s.string_stop_bits}, "
             f"{s.string_flow_control}")
 
+class SerialWorker(QObject):
+    data_ready = Signal(bytes)
+
+    def __init__(self):
+        super().__init__()
+        self.serial = QSerialPort()
+        self.serial.readyRead.connect(self.handle_ready_read)
+        self.packets = 0
+        self.bad_packets = 0
+
+    def handle_ready_read(self):
+        data = self.serial.readAll()
+        # buffer_temp = np.array(array.array('h', bytes(data)))
+        # self.packets += 1
+        # if len(buffer_temp) > 7:
+        #     self.bad_packets +=1
+        # print(1- (self.bad_packets/self.packets))
+        self.data_ready.emit(data)
 
 #QLineEdit, QCheckBox, QComboBox
 class AppConfig:
@@ -89,6 +109,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self.timer = QTimer()
         self.timer_plot = QTimer()
         self.timer_gen = QTimer()
@@ -96,17 +117,32 @@ class MainWindow(QMainWindow):
         self.m_settings = SettingsDialog(self)
         self.m_status = QLabel()
         self.m_serial = QSerialPort(self)
+        # self.serial_worker = SerialWorker()
+        # self.m_serial = self.serial_worker.serial
+        # self.serial_thread = QThread()
         self.m_ui.setupUi(self)
         self.config_settings = AppConfig()
 
+
+        self.prev_time = time.time()
+
+        self.buffer_speed = np.zeros(BUFFER_SIZE)
+
         self.pos = 0
+        self.prev_pos = 0
 
         self.gen_start_pos = 0
         self.gen_pos = 0
         self.gen_sign = True
 
+        self.packets = 0
+        self.bad_packets = 0
+
         self.shortcut_update = QShortcut(self)
         self.shortcut_update.setKey('q')
+
+        self.shortcut_auto_range = QShortcut(self)
+        self.shortcut_auto_range.setKey('r')
 
         self.config_settings.add_widget(self.m_ui.cb_enable)
         self.config_settings.add_widget(self.m_ui.cb_mode)
@@ -156,14 +192,16 @@ class MainWindow(QMainWindow):
         self.m_ui.bg_plots.setId(self.m_ui.radioButton_5, 4)
 
         self.timer.start(1000)
-        self.timer_plot.start(66)
+        self.timer_plot.start(33)
         self.pps = 0
+        self.prev_pps = 0
 
         self.le_list = (self.m_ui.le_setPos, self.m_ui.le_setPos1, self.m_ui.le_setPos2, self.m_ui.le_setPos3)
 
         self.send_buffer = [0 for _ in range(64)]
 
         self.plot = plt.Plot(self.m_ui.bg_plots)
+        #self.plot.setMenuEnabled(False)
         self.m_ui.vl_plot.addWidget(self.plot)
 
         for i, b in enumerate(self.m_ui.bg_clrPlots.buttons()):
@@ -190,10 +228,15 @@ class MainWindow(QMainWindow):
         self.m_ui.actionClear.triggered.connect(self.plot.clear_plot)
         self.m_ui.bg_plots.idClicked.connect(self.plot.update_plot_list)
         self.shortcut_update.activated.connect(self.m_ui.pb_updateConf.click)
+        self.shortcut_auto_range.activated.connect(self.auto_range)
 
         self.m_ui.actionConnect.setEnabled(True)
         self.m_ui.actionDisconnect.setEnabled(False)
 
+
+        # self.serial_worker.moveToThread(self.serial_thread)
+        # self.serial_worker.data_ready.connect(self.read_data)
+        # self.serial_thread.start()
         self.m_serial.errorOccurred.connect(self.handle_error)
         self.m_serial.readyRead.connect(self.read_data)
 
@@ -232,6 +275,7 @@ class MainWindow(QMainWindow):
     def update_timer(self):
         #print("packets per second", self.pps)
         self.m_ui.l_pps.setText(str(self.pps)+"sps")
+        self.prev_pps = self.pps
         self.pps = 0
 
     @Slot()
@@ -243,6 +287,7 @@ class MainWindow(QMainWindow):
         self.m_serial.setParity(s.parity)
         self.m_serial.setStopBits(s.stop_bits)
         self.m_serial.setFlowControl(s.flow_control)
+        self.m_serial.setReadBufferSize(12)
         if self.m_serial.open(QIODeviceBase.OpenModeFlag.ReadWrite):
             #self.m_console.setEnabled(True)
             #self.m_console.set_local_echo_enabled(s.local_echo_enabled)
@@ -269,17 +314,36 @@ class MainWindow(QMainWindow):
         self.m_status.setText(message)
 
     @Slot()
+    def handle_data(self, data):
+        self.m_ui.lr_angle.setText(str(f'{(1 - data): .2f}'))
+
+    @Slot()
     def read_data(self):
         self.pps += 1
         buffer_temp = np.array(array.array('h', bytes(self.m_serial.readAll())))
+        #buffer_temp = np.array(array.array('h', bytes(data)))
 
+        self.packets += 1
+        if len(buffer_temp) > 7:
+            self.bad_packets +=1
 
+        self.buffer_speed = np.roll(self.buffer_speed, shift=-1)
+        #self.buffer_speed[BUFFER_SIZE - 1] = (abs(self.prev_pos - self.pos) / (time.time() - self.prev_time))/91
+        elapsed_time = time.time() - self.prev_time
+        distance = abs(self.prev_pos - self.pos)
+        speed = distance * self.prev_pps
 
+        self.prev_time = time.time()
+
+        buffer_temp = buffer_temp[0:6]
         match buffer_temp[0]:
             case 0x6777 | 0x6782:
                 self.update_config(buffer_temp)
             case 0x6700:
+                buffer_temp = np.append(buffer_temp, speed/91)
                 self.plot.update_buffer_y(buffer_temp[1:])
+
+                self.prev_pos = self.pos
                 self.pos = buffer_temp[4]
 
                 angle = buffer_temp[4]
@@ -288,6 +352,8 @@ class MainWindow(QMainWindow):
 
 
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
+
+
 
 
 
@@ -350,6 +416,11 @@ class MainWindow(QMainWindow):
                                  self.m_serial.errorString())
             self.close_serial_port()
 
+    @Slot()
+    def auto_range(self):
+        #self.plot.getViewBox().autoRange()
+        self.plot.getViewBox().enableAutoRange()
+
     def update_config(self, data):
         self.m_ui.lr_pwm.setText(str(data[1]))
         self.m_ui.lr_paP.setText(str(data[2]/1000))
@@ -359,3 +430,4 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         self.config_settings.save_widgets()
+

@@ -10,14 +10,14 @@
     "le_paP": "0.5",
     "le_paD": "0.002",
     "le_zeroShift": "0",
-    "lineEdit": "D          ",
+    "lineEdit": "D              rrr rr",
     "radioButton_2": false,
-    "lineEdit_2": "Qq",
+    "lineEdit_2": "Q",
     "radioButton_3": false,
-    "lineEdit_3": "Angle",
+    "lineEdit_3": "Set Pos",
     "radioButton_4": true,
-    "lineEdit_4": "Set Pos",
-    "radioButton_5": true,
+    "lineEdit_4": "Angle",
+    "radioButton_5": false,
     "lineEdit_5": "trajectory",
-    "le_speed": "9100"
+    "le_speed": "18200"
 }

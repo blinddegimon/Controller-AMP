@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowyKWeDl.ui'
+## Form generated from reading UI file 'mainwindowJJPnME.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -46,6 +46,7 @@ class Ui_MainWindow(object):
         self.actionClear.setMenuRole(QAction.MenuRole.NoRole)
         self.actionPause = QAction(MainWindow)
         self.actionPause.setObjectName(u"actionPause")
+        self.actionPause.setCheckable(True)
         icon3 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackPause))
         self.actionPause.setIcon(icon3)
         self.actionPause.setMenuRole(QAction.MenuRole.NoRole)
