@@ -1,5 +1,5 @@
 from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread, QObject, Signal
-from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton
+from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton, QSpinBox
 from PySide6.QtSerialPort import QSerialPort
 from PySide6.QtGui import QShortcut
 
@@ -84,6 +84,8 @@ class AppConfig:
             case QComboBox():
                 value = widget.currentIndex()
                 #print("QComboBox")
+            case QSpinBox():
+                value = widget.value()
             case _:
                 print("something went wrong")
 
@@ -102,6 +104,8 @@ class AppConfig:
             case QComboBox():
                 widget.setCurrentIndex(value)
                 #print("QComboBox")
+            case QSpinBox():
+                widget.setValue(value)
             case _:
                 print("something went wrong")
 
@@ -109,6 +113,9 @@ class MainWindow(QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+
+        self.setFocus()
+
 
         self.timer = QTimer()
         self.timer_plot = QTimer()
@@ -144,6 +151,11 @@ class MainWindow(QMainWindow):
         self.shortcut_auto_range = QShortcut(self)
         self.shortcut_auto_range.setKey('r')
 
+        self.config_settings.add_widget(self.m_ui.cb_degrees)
+
+        self.config_settings.add_widget(self.m_ui.sb_genAmpl)
+        self.config_settings.add_widget(self.m_ui.sb_genFreq)
+
         self.config_settings.add_widget(self.m_ui.cb_enable)
         self.config_settings.add_widget(self.m_ui.cb_mode)
         self.config_settings.add_widget(self.m_ui.le_setPos)
@@ -172,6 +184,7 @@ class MainWindow(QMainWindow):
 
         self.config_settings.add_widget(self.m_ui.radioButton_5)
         self.config_settings.add_widget(self.m_ui.lineEdit_5)
+
 
 
         #self.config_settings.load_widgets()

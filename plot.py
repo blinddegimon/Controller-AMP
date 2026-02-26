@@ -71,11 +71,11 @@ class Plot(PlotWidget):
 
     def update_buffer_y(self, data):
         buffer_temp = data
-
-        for i, val in enumerate(self.plot_list):
-            if val:
-                self.buffer_y[i] = np.roll(self.buffer_y[i], shift=-1)
-                self.buffer_y[i][BUFFER_SIZE - 1] = buffer_temp[i]
+        if not self.pause:
+            for i, val in enumerate(self.plot_list):
+                if val:
+                    self.buffer_y[i] = np.roll(self.buffer_y[i], shift=-1)
+                    self.buffer_y[i][BUFFER_SIZE - 1] = buffer_temp[i]
 
 
                 #self.curve_list[i].setData(self.buffer_y[i])
