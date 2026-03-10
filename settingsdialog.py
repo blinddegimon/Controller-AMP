@@ -17,7 +17,7 @@ from ui_settingsdialog import Ui_SettingsDialog
 BLANK_STRING = "N/A"
 
 
-CUSTOM_BAUDRATE_INDEX = 4
+CUSTOM_BAUDRATE_INDEX = 5
 
 
 class Settings():
@@ -69,7 +69,10 @@ class SettingsDialog(QDialog):
         except:
             pass
 
-        self.update_settings()
+        try:
+            self.update_settings()
+        except:
+            pass
 
     def settings(self):
         return self.m_currentSettings
@@ -96,6 +99,7 @@ class SettingsDialog(QDialog):
 
     @Slot()
     def apply(self):
+        self.save_settings()
         self.update_settings()
         self.hide()
 
@@ -120,6 +124,7 @@ class SettingsDialog(QDialog):
         self.m_ui.baudRateBox.addItem("19200", QSerialPort.BaudRate.Baud19200)
         self.m_ui.baudRateBox.addItem("38400", QSerialPort.BaudRate.Baud38400)
         self.m_ui.baudRateBox.addItem("115200", QSerialPort.BaudRate.Baud115200)
+        self.m_ui.baudRateBox.addItem("921600", 921600)
         self.m_ui.baudRateBox.addItem("Custom")
 
         self.m_ui.dataBitsBox.addItem("5", QSerialPort.DataBits.Data5)
@@ -190,6 +195,9 @@ class SettingsDialog(QDialog):
 
         self.m_currentSettings.local_echo_enabled = self.m_ui.localEchoCheckBox.isChecked()
 
-    def closeEvent(self, event):
+    def save_settings(self):
         self.config_settings.setValue("COM", self.m_ui.serialPortInfoListBox.currentIndex())
         self.config_settings.setValue("BaudRate", self.m_ui.baudRateBox.currentIndex())
+
+    def closeEvent(self, event):
+        self.save_settings()

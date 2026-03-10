@@ -3,6 +3,10 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Project specific, .json config files
+
+*_config_widgets.json
+
 # C extensions
 *.so
 
