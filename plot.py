@@ -46,12 +46,12 @@ class Plot(PlotWidget):
         self.getViewBox().setLimits(xMin = 0, xMax = BUFFER_SIZE)
         #self.getViewBox().enableAutoRange()
 
-        self.curves_amount = 6
+        self.curves_amount = 5
 
         self.bg_plots = bg_plots
         self.plot_list = [True for _ in range(self.curves_amount)]
         self.curve_list = [None for _ in range(self.curves_amount)]
-        self.color_list = ((7,41,84), (224,43,51), (240,197,113), (89,168,155), (166,89,169), (0,250,0))
+        self.color_list = ((7,41,84), (224,43,51), (240,197,113), (89,168,155), (166,89,169))
         for i in range(0,self.curves_amount):
             self.curve_list[i] = self.plot(pen = mkPen(self.color_list[i], width=1))
 

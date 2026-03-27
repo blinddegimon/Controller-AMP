@@ -168,6 +168,7 @@ class MainWindow(QMainWindow):
         self.config_settings.add_widget(self.m_ui.le_paD)
         self.config_settings.add_widget(self.m_ui.le_zeroShift)
         self.config_settings.add_widget(self.m_ui.le_speed)
+        self.config_settings.add_widget(self.m_ui.le_step)
 
 
         self.config_settings.add_widget(self.m_ui.radioButton)
@@ -300,7 +301,7 @@ class MainWindow(QMainWindow):
         self.m_serial.setParity(s.parity)
         self.m_serial.setStopBits(s.stop_bits)
         self.m_serial.setFlowControl(s.flow_control)
-        self.m_serial.setReadBufferSize(12)
+        self.m_serial.setReadBufferSize(14)
         if self.m_serial.open(QIODeviceBase.OpenModeFlag.ReadWrite):
             #self.m_console.setEnabled(True)
             #self.m_console.set_local_echo_enabled(s.local_echo_enabled)
@@ -337,24 +338,27 @@ class MainWindow(QMainWindow):
         #buffer_temp = np.array(array.array('h', bytes(data)))
 
         self.packets += 1
-        if len(buffer_temp) > 7:
+        if len(buffer_temp) > 8:
             self.bad_packets +=1
 
         self.buffer_speed = np.roll(self.buffer_speed, shift=-1)
         #self.buffer_speed[BUFFER_SIZE - 1] = (abs(self.prev_pos - self.pos) / (time.time() - self.prev_time))/91
-        elapsed_time = time.time() - self.prev_time
-        distance = abs(self.prev_pos - self.pos)
-        speed = distance * self.prev_pps
+        # elapsed_time = time.time() - self.prev_time
+        # distance = abs(self.prev_pos - self.pos)
+        #
+        # speed = distance * self.prev_pps
+
 
         self.prev_time = time.time()
 
-        buffer_temp = buffer_temp[0:6]
+
         match buffer_temp[0]:
             case 0x6777 | 0x6782:
                 self.update_config(buffer_temp)
             case 0x6700:
-                buffer_temp = np.append(buffer_temp, speed/91)
-                self.plot.update_buffer_y(buffer_temp[1:])
+
+                buffer_temp_pl = buffer_temp[1:6]
+                self.plot.update_buffer_y(buffer_temp_pl)
 
                 self.prev_pos = self.pos
                 self.pos = buffer_temp[4]
@@ -376,6 +380,14 @@ class MainWindow(QMainWindow):
         self.send_buffer[1] = self.m_ui.cb_enable.isChecked()
         self.send_buffer[2] = self.m_ui.cb_mode.isChecked()
         self.send_buffer[3] = int(self.le_list[btn_id].text())
+
+        if self.m_ui.pb_arr.isChecked() and self.m_ui.pb_rarr.isChecked():
+            self.send_buffer[4] = 0
+        elif self.m_ui.pb_arr.isChecked():
+            self.send_buffer[4] = 1
+            print("arr")
+        elif self.m_ui.pb_rarr.isChecked():
+            self.send_buffer[4] = 2
 
         buffer = QByteArray(to_b16t(self.send_buffer))
         self.m_serial.write(buffer)
@@ -418,6 +430,7 @@ class MainWindow(QMainWindow):
         self.send_buffer[3] = int(float(self.m_ui.le_paD.text()) * 1000)
         self.send_buffer[4] = int(self.m_ui.le_zeroShift.text())
         self.send_buffer[5] = int(self.m_ui.le_speed.text())
+        self.send_buffer[6] = int(float(self.m_ui.le_step.text()) * 10)
 
         buffer = QByteArray(to_b16t(self.send_buffer))
         self.m_serial.write(buffer)
@@ -440,6 +453,7 @@ class MainWindow(QMainWindow):
         self.m_ui.lr_paD.setText(str(data[3]/1000))
         self.m_ui.lr_zeroShift.setText(str(data[4]))
         self.m_ui.lr_speed.setText(str(data[5]))
+        self.m_ui.lr_step.setText(str(data[6]/10))
 
     def closeEvent(self, event):
         self.config_settings.save_widgets()
