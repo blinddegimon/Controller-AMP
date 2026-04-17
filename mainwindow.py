@@ -18,13 +18,27 @@ BUFFER_SIZE = 1000
 def to_b16t(i):
     r = bytearray()
     for e in i:
-        r += e.to_bytes(2,'little',signed=True)
+        r += e.to_bytes(2,'little',signed=False)
     return r
 
 def description(s):
     return (f"Connected to {s.name} : {s.string_baud_rate}, "
             f"{s.string_data_bits}, {s.string_parity}, {s.string_stop_bits}, "
             f"{s.string_flow_control}")
+
+def motor_mode(i):
+    res = ""
+    match i:
+        case 0:
+            res = "OPEN"
+        case 1:
+            res = "CLOSE"
+        case 2:
+            res = "FOC"
+        case _:
+            res = "ERROR"
+
+    return res
 
 class SerialWorker(QObject):
     data_ready = Signal(bytes)
@@ -68,6 +82,8 @@ class AppConfig:
 
         for name, value in self.widget_dict.items():
             self.write_widget(self.widgets[name], value)
+
+
 
     @staticmethod
     def match_widget(widget):
@@ -131,6 +147,7 @@ class MainWindow(QMainWindow):
         self.config_settings = AppConfig()
 
 
+
         self.prev_time = time.time()
 
         self.buffer_speed = np.zeros(BUFFER_SIZE)
@@ -163,12 +180,35 @@ class MainWindow(QMainWindow):
         self.config_settings.add_widget(self.m_ui.le_setPos2)
         self.config_settings.add_widget(self.m_ui.le_setPos3)
 
+        # self.config_settings.add_widget(self.m_ui.le_pwm)
+        # self.config_settings.add_widget(self.m_ui.le_paP)
+        # self.config_settings.add_widget(self.m_ui.le_paD)
+        # self.config_settings.add_widget(self.m_ui.le_zeroShift)
+        # self.config_settings.add_widget(self.m_ui.le_speed)
+        # self.config_settings.add_widget(self.m_ui.le_step)
         self.config_settings.add_widget(self.m_ui.le_pwm)
-        self.config_settings.add_widget(self.m_ui.le_paP)
-        self.config_settings.add_widget(self.m_ui.le_paD)
+        self.config_settings.add_widget(self.m_ui.le_Q)
+        self.config_settings.add_widget(self.m_ui.le_D)
+        self.config_settings.add_widget(self.m_ui.le_elZeroShift)
+        self.config_settings.add_widget(self.m_ui.le_phStep)
+        self.config_settings.add_widget(self.m_ui.le_phAcc)
+        self.config_settings.add_widget(self.m_ui.cb_mtMode)
+
+        self.config_settings.add_widget(self.m_ui.le_posP)
+        self.config_settings.add_widget(self.m_ui.le_posD)
+        self.config_settings.add_widget(self.m_ui.le_posSat)
+        self.config_settings.add_widget(self.m_ui.le_spP)
+        self.config_settings.add_widget(self.m_ui.le_spI)
+        self.config_settings.add_widget(self.m_ui.le_spSat)
+        self.config_settings.add_widget(self.m_ui.le_res)
+
         self.config_settings.add_widget(self.m_ui.le_zeroShift)
-        self.config_settings.add_widget(self.m_ui.le_speed)
-        self.config_settings.add_widget(self.m_ui.le_step)
+        self.config_settings.add_widget(self.m_ui.le_range)
+        self.config_settings.add_widget(self.m_ui.le_res_2)
+        self.config_settings.add_widget(self.m_ui.le_res_3)
+        self.config_settings.add_widget(self.m_ui.le_res_4)
+        self.config_settings.add_widget(self.m_ui.le_res_5)
+        self.config_settings.add_widget(self.m_ui.le_res_6)
 
 
         self.config_settings.add_widget(self.m_ui.radioButton)
@@ -194,6 +234,8 @@ class MainWindow(QMainWindow):
         except:
             pass
 
+
+
         self.m_ui.bg_send.setId(self.m_ui.pb_send, 0)
         self.m_ui.bg_send.setId(self.m_ui.pb_setPos1, 1)
         self.m_ui.bg_send.setId(self.m_ui.pb_setPos2, 2)
@@ -213,6 +255,7 @@ class MainWindow(QMainWindow):
         self.le_list = (self.m_ui.le_setPos, self.m_ui.le_setPos1, self.m_ui.le_setPos2, self.m_ui.le_setPos3)
 
         self.send_buffer = [0 for _ in range(64)]
+        self.uart_buffer = [0 for _ in range(9)]
 
         self.plot = plt.Plot(self.m_ui.bg_plots)
         #self.plot.setMenuEnabled(False)
@@ -227,10 +270,12 @@ class MainWindow(QMainWindow):
         self.m_ui.actionConnect.triggered.connect(self.open_serial_port)
         self.m_ui.actionDisconnect.triggered.connect(self.close_serial_port)
         self.m_ui.bg_send.idClicked.connect(self.send_data)
-        self.m_ui.pb_updateConf.clicked.connect(self.send_config)
-        self.m_ui.pb_readMem.clicked.connect(self.send_read_mem)
-        self.m_ui.pb_readConf.clicked.connect(self.send_read_config)
-        self.m_ui.pb_saveConf.clicked.connect(self.send_config_save)
+
+        self.m_ui.bg_read.buttonClicked.connect(self.send_read_config)
+        self.m_ui.bg_readM.buttonClicked.connect(self.send_read_mem)
+        self.m_ui.bg_update.buttonClicked.connect(self.send_config)
+        self.m_ui.bg_save.buttonClicked.connect(self.send_config_save)
+
         self.m_ui.actionConfigure.triggered.connect(self.m_settings.show)
         self.m_ui.actionStop.triggered.connect(self.send_disable)
 
@@ -241,7 +286,7 @@ class MainWindow(QMainWindow):
         self.m_ui.actionPause.triggered.connect(self.plot.update_pause)
         self.m_ui.actionClear.triggered.connect(self.plot.clear_plot)
         self.m_ui.bg_plots.idClicked.connect(self.plot.update_plot_list)
-        self.shortcut_update.activated.connect(self.m_ui.pb_updateConf.click)
+        #self.shortcut_update.activated.connect(self.m_ui.pb_updateConf.click)
         self.shortcut_auto_range.activated.connect(self.auto_range)
 
         self.m_ui.actionConnect.setEnabled(True)
@@ -301,7 +346,7 @@ class MainWindow(QMainWindow):
         self.m_serial.setParity(s.parity)
         self.m_serial.setStopBits(s.stop_bits)
         self.m_serial.setFlowControl(s.flow_control)
-        self.m_serial.setReadBufferSize(14)
+        self.m_serial.setReadBufferSize(16)
         if self.m_serial.open(QIODeviceBase.OpenModeFlag.ReadWrite):
             #self.m_console.setEnabled(True)
             #self.m_console.set_local_echo_enabled(s.local_echo_enabled)
@@ -352,8 +397,8 @@ class MainWindow(QMainWindow):
         self.prev_time = time.time()
 
 
-        match buffer_temp[0]:
-            case 0x6777 | 0x6782:
+        match int(buffer_temp[0]) & 0xffff:
+            case 0x8277 | 0x8280 | 0x8288 | 0x7777 | 0x7780 | 0x7788:
                 self.update_config(buffer_temp)
             case 0x6700:
 
@@ -369,9 +414,6 @@ class MainWindow(QMainWindow):
 
 
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
-
-
-
 
 
     @Slot(int)
@@ -400,39 +442,128 @@ class MainWindow(QMainWindow):
         buffer = QByteArray(to_b16t(self.send_buffer))
         self.m_serial.write(buffer)
 
-    @Slot()
-    def send_read_mem(self):
-        self.send_buffer[0] = 0x6777
+    def start_buffer_to_send(self, header):
+        if self.m_ui.cb_ampSelect.currentIndex() == 0:
+            self.send_buffer[0] = header
 
-        buffer = QByteArray(to_b16t(self.send_buffer))
+            buffer = QByteArray(to_b16t(self.send_buffer))
+
+        else:
+            self.uart_buffer[0] = int(
+                str(ord(self.m_ui.cb_ampSelect.currentText()[0])) + str(ord(self.m_ui.cb_ampSelect.currentText()[1])))
+            self.uart_buffer[1] = header
+
+            buffer = QByteArray(to_b16t(self.uart_buffer))
+
+        return buffer
+
+    @Slot()
+    def send_read_mem(self, btn):
+        header = 0
+
+        match btn.objectName():
+            case "pb_mReadMem":
+                header = 0x7777
+            case "pb_pidReadMem":
+                header = 0x7780
+            case "pb_genReadMem":
+                header = 0x7788
+            case _:
+                header = 0
+
+        buffer = self.start_buffer_to_send(header)
+
+        #print(buffer)
+        self.m_serial.write(buffer)
+
+
+    @Slot()
+    def send_read_config(self, btn):
+        header = 0
+
+        match btn.objectName():
+            case "pb_mReadConf":
+                header = 0x8277
+            case "pb_pidReadConf":
+                header = 0x8280
+            case "pb_genReadConf":
+                header = 0x8288
+            case _:
+                header = 0
+
+        buffer = self.start_buffer_to_send(header)
+
+        #print(buffer)
+        self.m_serial.write(buffer)
+
+
+    @Slot()
+    def send_config_save(self, btn):
+        header = 0
+        print(btn.objectName())
+
+        match btn.objectName():
+            case "pb_mSaveConf":
+                header = 0x8377
+            case "pb_pidSaveConf":
+                header = 0x8380
+            case "pb_genSaveConf":
+                header = 0x8388
+            case _:
+                header = 0
+
+        buffer = self.start_buffer_to_send(header)
         self.m_serial.write(buffer)
 
     @Slot()
-    def send_read_config(self):
-        self.send_buffer[0] = 0x6782
+    def send_config(self, btn):
+        header = 0
+        sbuffer = [0 for _ in range(7)]
 
-        buffer = QByteArray(to_b16t(self.send_buffer))
-        self.m_serial.write(buffer)
+        match btn.objectName():
+            case "pb_mUpdateConf":
+                header = 0x8777
+                sbuffer[0] = int(self.m_ui.le_pwm.text())
+                sbuffer[1] = int(float(self.m_ui.le_Q.text()) * 10)
+                sbuffer[2] = int(float(self.m_ui.le_D.text()) * 10)
+                sbuffer[3] = int(self.m_ui.le_elZeroShift.text())
+                sbuffer[4] = int(float(self.m_ui.le_phStep.text()) * 10)
+                sbuffer[5] = int(float(self.m_ui.le_phAcc.text()) * 10)
+                sbuffer[6] = self.m_ui.cb_mtMode.currentIndex()
 
-    @Slot()
-    def send_config_save(self):
-        self.send_buffer[0] = 0x6783
+            case "pb_pidUpdateConf":
+                header = 0x8780
+                sbuffer[0] = int(float(self.m_ui.le_posP.text()) * 1000)
+                sbuffer[1] = int(float(self.m_ui.le_posD.text()) * 1000)
+                sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 1000)
+                sbuffer[3] = int(float(self.m_ui.le_spP.text()) * 1000)
+                sbuffer[4] = int(float(self.m_ui.le_spI.text()) * 1000)
+                sbuffer[5] = int(float(self.m_ui.le_spSat.text()) * 1000)
+                sbuffer[6] = int(self.m_ui.le_res.text())
 
-        buffer = QByteArray(to_b16t(self.send_buffer))
-        self.m_serial.write(buffer)
+            case "pb_genUpdateConf":
+                header = 0x8788
+                sbuffer[0] = int(self.m_ui.le_zeroShift.text())
+                sbuffer[1] = int(self.m_ui.le_range.text())
+                sbuffer[2] = int(self.m_ui.le_res_2.text())
+                sbuffer[3] = int(self.m_ui.le_res_3.text())
+                sbuffer[4] = int(self.m_ui.le_res_4.text())
+                sbuffer[5] = int(self.m_ui.le_res_5.text())
+                sbuffer[6] = int(self.m_ui.le_res_6.text())
 
-    @Slot()
-    def send_config(self):
-        print("update")
-        self.send_buffer[0] = 0x6770
-        self.send_buffer[1] = int(self.m_ui.le_pwm.text())
-        self.send_buffer[2] = int(float(self.m_ui.le_paP.text()) * 1000)
-        self.send_buffer[3] = int(float(self.m_ui.le_paD.text()) * 1000)
-        self.send_buffer[4] = int(self.m_ui.le_zeroShift.text())
-        self.send_buffer[5] = int(self.m_ui.le_speed.text())
-        self.send_buffer[6] = int(float(self.m_ui.le_step.text()) * 10)
+            case _:
+                header = 0
 
-        buffer = QByteArray(to_b16t(self.send_buffer))
+        self.start_buffer_to_send(header)
+
+        match self.m_ui.cb_ampSelect.currentIndex():
+            case 0:
+                self.send_buffer[1:7] = sbuffer
+                buffer = QByteArray(to_b16t(self.send_buffer))
+            case 1 | 2 | 3 | 4 :
+                self.uart_buffer[2:] = sbuffer
+                buffer = QByteArray(to_b16t(self.uart_buffer))
+
         self.m_serial.write(buffer)
 
     @Slot(QSerialPort.SerialPortError)
@@ -448,12 +579,36 @@ class MainWindow(QMainWindow):
         self.plot.getViewBox().enableAutoRange()
 
     def update_config(self, data):
-        self.m_ui.lr_pwm.setText(str(data[1]))
-        self.m_ui.lr_paP.setText(str(data[2]/1000))
-        self.m_ui.lr_paD.setText(str(data[3]/1000))
-        self.m_ui.lr_zeroShift.setText(str(data[4]))
-        self.m_ui.lr_speed.setText(str(data[5]))
-        self.m_ui.lr_step.setText(str(data[6]/10))
+        match int(data[0]) & 0xffff:
+            case 0x8277 | 0x7777:
+                self.m_ui.lr_pwm.setText(str(data[1]))
+                self.m_ui.lr_Q.setText(str(data[2] / 10))
+                self.m_ui.lr_D.setText(str(data[3] / 10))
+                self.m_ui.lr_elZeroShift.setText(str(data[4]))
+                self.m_ui.lr_phStep.setText(str(data[5] / 10))
+                self.m_ui.lr_phAcc.setText(str(data[6] / 10))
+                self.m_ui.lr_mtMode.setText(motor_mode(data[7]))
+
+            case 0x8280 | 0x7780:
+                self.m_ui.lr_posP.setText(str(data[1]/1000))
+                self.m_ui.lr_posD.setText(str(data[2] / 1000))
+                self.m_ui.lr_posSat.setText(str(data[3] / 1000))
+                self.m_ui.lr_spP.setText(str(data[4] / 1000))
+                self.m_ui.lr_spI.setText(str(data[5] / 1000))
+                self.m_ui.lr_spSat.setText(str(data[6] / 1000))
+                self.m_ui.lr_res.setText(str(data[7]))
+
+            case 0x8288 | 0x7788:
+                self.m_ui.lr_zeroShift.setText(str(data[1]))
+                self.m_ui.lr_range.setText(str(data[2]))
+                self.m_ui.lr_res_2.setText(str(data[3]))
+                self.m_ui.lr_res_3.setText(str(data[4]))
+                self.m_ui.lr_res_4.setText(str(data[5]))
+                self.m_ui.lr_res_5.setText(str(data[6]))
+                self.m_ui.lr_res_6.setText(str(data[7]))
+            case _:
+                pass
+
 
     def closeEvent(self, event):
         self.config_settings.save_widgets()
