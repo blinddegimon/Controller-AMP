@@ -6,9 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1667</width>
-    <height>775</height>
+    <width>1699</width>
+    <height>812</height>
    </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::FocusPolicy::ClickFocus</enum>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -17,6 +20,9 @@
    <layout class="QGridLayout" name="gridLayout_3" rowstretch="1,0" columnstretch="0,0,0,0">
     <item row="1" column="3">
      <widget class="QFrame" name="frame">
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::ClickFocus</enum>
+      </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
       </property>
@@ -25,7 +31,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <layout class="QGridLayout" name="gridLayout_2" columnstretch="50,0,0,0,0">
+        <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0">
          <item row="9" column="2">
           <widget class="QPushButton" name="pb_mReadMem">
            <property name="text">
@@ -319,6 +325,9 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="inputMethodHints">
+            <set>Qt::InputMethodHint::ImhNone</set>
+           </property>
           </widget>
          </item>
          <item row="2" column="1" colspan="2">
@@ -328,6 +337,9 @@
              <pointsize>11</pointsize>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
            </property>
            <property name="readOnly">
             <bool>true</bool>
@@ -380,17 +392,17 @@
           <widget class="QComboBox" name="cb_mtMode">
            <item>
             <property name="text">
-             <string>OPEN</string>
+             <string>DRIVER_OPEN</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>CLOSE</string>
+             <string>DRIVER_CLOSE</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>FOC</string>
+             <string>DRIVER_FOC</string>
             </property>
            </item>
           </widget>
@@ -819,7 +831,7 @@
             </font>
            </property>
            <property name="text">
-            <string>RESERVE</string>
+            <string>Arr zero shift</string>
            </property>
           </widget>
          </item>
@@ -982,7 +994,7 @@
             </font>
            </property>
            <property name="text">
-            <string>RESERVE</string>
+            <string>AMP ID</string>
            </property>
           </widget>
          </item>
@@ -1072,6 +1084,9 @@
     </item>
     <item row="1" column="0">
      <widget class="QFrame" name="frame_3">
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::ClickFocus</enum>
+      </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
       </property>
@@ -1080,7 +1095,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0" columnstretch="50,50,50,50">
+        <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0" columnminimumwidth="0,0,0,80">
          <item row="0" column="1">
           <widget class="QLineEdit" name="lr_angle">
            <property name="font">
@@ -1094,180 +1109,6 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="2">
-          <widget class="QPushButton" name="pb_setPos3">
-           <property name="text">
-            <string>SetPos 3</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">bg_send</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="sb_genFreq">
-           <property name="wrapping">
-            <bool>false</bool>
-           </property>
-           <property name="suffix">
-            <string> Hz</string>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Mode:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3">
-          <widget class="QLineEdit" name="le_setPos1">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Set Pos:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="label_14">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Degrees:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QCheckBox" name="cb_enable">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="3">
-          <widget class="QLineEdit" name="le_setPos2">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QCheckBox" name="cb_degrees">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="3">
-          <widget class="QLineEdit" name="le_setPos3">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QPushButton" name="pb_setPos1">
-           <property name="text">
-            <string>SetPos 1</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">bg_send</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_13">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Angle:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Enable:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="2">
-          <widget class="QPushButton" name="pb_setPos2">
-           <property name="text">
-            <string>SetPos 2</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">bg_send</string>
-           </attribute>
-          </widget>
-         </item>
-         <item row="7" column="3">
-          <widget class="QLabel" name="l_pps">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLineEdit" name="le_setPos">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="pb_gen">
-           <property name="text">
-            <string>GEN</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="2">
           <widget class="QSpinBox" name="sb_genAmpl">
            <property name="suffix">
@@ -1276,23 +1117,6 @@
            <property name="minimum">
             <number>1</number>
            </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QCheckBox" name="cb_mode">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0" colspan="2">
-          <widget class="QPushButton" name="pb_send">
-           <property name="text">
-            <string>SEND</string>
-           </property>
-           <attribute name="buttonGroup">
-            <string notr="true">bg_send</string>
-           </attribute>
           </widget>
          </item>
          <item row="2" column="0" colspan="4">
@@ -1311,26 +1135,245 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="pb_arr">
+         <item row="7" column="0" colspan="2">
+          <widget class="QPushButton" name="pb_send">
            <property name="text">
-            <string>ARR</string>
+            <string>SEND</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">bg_send</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="7" column="3">
+          <widget class="QLabel" name="l_pps">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pb_gen">
+           <property name="text">
+            <string>GEN</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
            </property>
-           <property name="autoExclusive">
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="sb_genFreq">
+           <property name="wrapping">
             <bool>false</bool>
+           </property>
+           <property name="suffix">
+            <string> Hz</string>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QCheckBox" name="cb_degrees">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Angle:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_14">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Degrees:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Enable:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="cb_enable">
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QPushButton" name="pb_rarr">
+          <widget class="QPushButton" name="pb_setPos1">
            <property name="text">
-            <string>RARR</string>
+            <string>SetPos 1</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">bg_send</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>App Mode:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Set Pos:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QComboBox" name="cb_appMode">
+           <item>
+            <property name="text">
+             <string>APP_OPEN</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>APP_CLOSE</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="le_setPos">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QPushButton" name="pb_setPos2">
+           <property name="text">
+            <string>SetPos 2</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">bg_send</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QPushButton" name="pb_setPos3">
+           <property name="text">
+            <string>SetPos 3</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">bg_send</string>
+           </attribute>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLineEdit" name="le_setPos1">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QLineEdit" name="le_setPos2">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3">
+          <widget class="QLineEdit" name="le_setPos3">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_17">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Arr Mode:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QComboBox" name="cb_arr">
+           <item>
+            <property name="text">
+             <string>NONE</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ARR</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>RARR</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QPushButton" name="pb_arr">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string/>
            </property>
            <property name="checkable">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
            <property name="autoExclusive">
             <bool>false</bool>
@@ -1344,6 +1387,9 @@
     </item>
     <item row="0" column="0" colspan="4">
      <widget class="QFrame" name="frame_2">
+      <property name="focusPolicy">
+       <enum>Qt::FocusPolicy::ClickFocus</enum>
+      </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
       </property>
@@ -1531,7 +1577,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1667</width>
+     <width>1699</width>
      <height>33</height>
     </rect>
    </property>

@@ -1,7 +1,7 @@
-from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread, QObject, Signal
+from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread, QObject, Signal, QLocale
 from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton, QSpinBox
 from PySide6.QtSerialPort import QSerialPort
-from PySide6.QtGui import QShortcut
+from PySide6.QtGui import QShortcut, QIntValidator, QDoubleValidator
 
 from plot import CustomViewBox
 from ui_mainwindow import Ui_MainWindow
@@ -18,7 +18,10 @@ BUFFER_SIZE = 1000
 def to_b16t(i):
     r = bytearray()
     for e in i:
-        r += e.to_bytes(2,'little',signed=False)
+        if e<0:
+            r += e.to_bytes(2, 'little', signed=True)
+        else:
+            r += e.to_bytes(2,'little',signed=False)
     return r
 
 def description(s):
@@ -147,6 +150,28 @@ class MainWindow(QMainWindow):
         self.config_settings = AppConfig()
 
 
+        self.onlyInt = QIntValidator()
+
+        self.onlyFloat1 = QDoubleValidator()
+        self.onlyFloat1.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
+        self.onlyFloat1.setNotation(QDoubleValidator.Notation.StandardNotation)
+        self.onlyFloat1.setDecimals(1)
+
+        self.onlyFloat3 = QDoubleValidator()
+        self.onlyFloat3.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
+        self.onlyFloat3.setNotation(QDoubleValidator.Notation.StandardNotation)
+        self.onlyFloat3.setDecimals(3)
+
+        self.onlyInt.setRange(0, 4095)
+        self.m_ui.le_pwm.setValidator(self.onlyInt)
+        self.m_ui.le_pwm.returnPressed.connect(self.m_ui.le_pwm.clearFocus)
+
+        self.m_ui.le_Q.setValidator(self.onlyFloat1)
+        self.m_ui.le_Q.returnPressed.connect(self.m_ui.le_Q.clearFocus)
+
+        self.m_ui.le_posP.setValidator(self.onlyFloat3)
+        self.m_ui.le_posP.returnPressed.connect(self.m_ui.le_posP.clearFocus)
+
 
         self.prev_time = time.time()
 
@@ -174,7 +199,9 @@ class MainWindow(QMainWindow):
         self.config_settings.add_widget(self.m_ui.sb_genFreq)
 
         self.config_settings.add_widget(self.m_ui.cb_enable)
-        self.config_settings.add_widget(self.m_ui.cb_mode)
+        #self.config_settings.add_widget(self.m_ui.cb_mode)
+        self.config_settings.add_widget(self.m_ui.cb_appMode)
+        self.config_settings.add_widget(self.m_ui.cb_arr)
         self.config_settings.add_widget(self.m_ui.le_setPos)
         self.config_settings.add_widget(self.m_ui.le_setPos1)
         self.config_settings.add_widget(self.m_ui.le_setPos2)
@@ -304,6 +331,10 @@ class MainWindow(QMainWindow):
         self.timer_gen.timeout.connect(self.update_gen)
 
     @Slot()
+    def test_f(self):
+        print("test")
+
+    @Slot()
     def timer_gen_start(self, btn):
         self.gen_start_pos = self.pos
         print(btn)
@@ -406,7 +437,7 @@ class MainWindow(QMainWindow):
                 self.plot.update_buffer_y(buffer_temp_pl)
 
                 self.prev_pos = self.pos
-                self.pos = buffer_temp[4]
+                self.pos = buffer_temp[2]
 
                 angle = buffer_temp[4]
                 if self.m_ui.cb_degrees.isChecked():
@@ -415,21 +446,24 @@ class MainWindow(QMainWindow):
 
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
 
+                self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[6] else "OPEN")
+                self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(92, 179, 56)" if buffer_temp[6] else "rgb(251, 65, 65)"))
+
 
     @Slot(int)
     def send_data(self, btn_id: int):
         self.send_buffer[0] = 0x6788
         self.send_buffer[1] = self.m_ui.cb_enable.isChecked()
-        self.send_buffer[2] = self.m_ui.cb_mode.isChecked()
+        self.send_buffer[2] = self.m_ui.cb_appMode.currentIndex()
         self.send_buffer[3] = int(self.le_list[btn_id].text())
-
-        if self.m_ui.pb_arr.isChecked() and self.m_ui.pb_rarr.isChecked():
-            self.send_buffer[4] = 0
-        elif self.m_ui.pb_arr.isChecked():
-            self.send_buffer[4] = 1
-            print("arr")
-        elif self.m_ui.pb_rarr.isChecked():
-            self.send_buffer[4] = 2
+        self.send_buffer[4] = self.m_ui.cb_arr.currentIndex()
+        # if self.m_ui.pb_arr.isChecked() and self.m_ui.pb_rarr.isChecked():
+        #     self.send_buffer[4] = 0
+        # elif self.m_ui.pb_arr.isChecked():
+        #     self.send_buffer[4] = 1
+        #     print("arr")
+        # elif self.m_ui.pb_rarr.isChecked():
+        #     self.send_buffer[4] = 2
 
         buffer = QByteArray(to_b16t(self.send_buffer))
         self.m_serial.write(buffer)
@@ -471,6 +505,8 @@ class MainWindow(QMainWindow):
             case _:
                 header = 0
 
+        self.clear_lr_config(header)
+
         buffer = self.start_buffer_to_send(header)
 
         #print(buffer)
@@ -481,6 +517,7 @@ class MainWindow(QMainWindow):
     def send_read_config(self, btn):
         header = 0
 
+
         match btn.objectName():
             case "pb_mReadConf":
                 header = 0x8277
@@ -490,6 +527,8 @@ class MainWindow(QMainWindow):
                 header = 0x8288
             case _:
                 header = 0
+
+        self.clear_lr_config(header)
 
         buffer = self.start_buffer_to_send(header)
 
@@ -579,6 +618,7 @@ class MainWindow(QMainWindow):
         self.plot.getViewBox().enableAutoRange()
 
     def update_config(self, data):
+        time.sleep(0.05)
         match int(data[0]) & 0xffff:
             case 0x8277 | 0x7777:
                 self.m_ui.lr_pwm.setText(str(data[1]))
@@ -609,6 +649,37 @@ class MainWindow(QMainWindow):
             case _:
                 pass
 
+    def clear_lr_config(self, ined):
+        none_el = "NONE"
+        match ined:
+            case 0x8277 | 0x7777:
+                self.m_ui.lr_pwm.setText(none_el)
+                self.m_ui.lr_Q.setText(none_el)
+                self.m_ui.lr_D.setText(none_el)
+                self.m_ui.lr_elZeroShift.setText(none_el)
+                self.m_ui.lr_phStep.setText(none_el)
+                self.m_ui.lr_phAcc.setText(none_el)
+                self.m_ui.lr_mtMode.setText(none_el)
+
+            case 0x8280 | 0x7780:
+                self.m_ui.lr_posP.setText(none_el)
+                self.m_ui.lr_posD.setText(none_el)
+                self.m_ui.lr_posSat.setText(none_el)
+                self.m_ui.lr_spP.setText(none_el)
+                self.m_ui.lr_spI.setText(none_el)
+                self.m_ui.lr_spSat.setText(none_el)
+                self.m_ui.lr_res.setText(none_el)
+
+            case 0x8288 | 0x7788:
+                self.m_ui.lr_zeroShift.setText(none_el)
+                self.m_ui.lr_range.setText(none_el)
+                self.m_ui.lr_res_2.setText(none_el)
+                self.m_ui.lr_res_3.setText(none_el)
+                self.m_ui.lr_res_4.setText(none_el)
+                self.m_ui.lr_res_5.setText(none_el)
+                self.m_ui.lr_res_6.setText(none_el)
+            case _:
+                pass
 
     def closeEvent(self, event):
         self.config_settings.save_widgets()

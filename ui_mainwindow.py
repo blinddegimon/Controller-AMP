@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowBtYjau.ui'
+## Form generated from reading UI file 'mainwindowVeuHFi.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -26,7 +26,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1667, 775)
+        MainWindow.resize(1699, 812)
+        MainWindow.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.actionConnect = QAction(MainWindow)
         self.actionConnect.setObjectName(u"actionConnect")
         icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaylistShuffle))
@@ -60,6 +61,7 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
+        self.frame.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.frame)
@@ -237,12 +239,14 @@ class Ui_MainWindow(object):
         self.le_pwm = QLineEdit(self.frame)
         self.le_pwm.setObjectName(u"le_pwm")
         self.le_pwm.setFont(font1)
+        self.le_pwm.setInputMethodHints(Qt.InputMethodHint.ImhNone)
 
         self.gridLayout_2.addWidget(self.le_pwm, 2, 3, 1, 2)
 
         self.lr_pwm = QLineEdit(self.frame)
         self.lr_pwm.setObjectName(u"lr_pwm")
         self.lr_pwm.setFont(font1)
+        self.lr_pwm.setFrame(True)
         self.lr_pwm.setReadOnly(True)
 
         self.gridLayout_2.addWidget(self.lr_pwm, 2, 1, 1, 2)
@@ -272,7 +276,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.cb_mtMode, 8, 3, 1, 2)
 
-        self.gridLayout_2.setColumnStretch(0, 50)
 
         self.horizontalLayout_2.addLayout(self.gridLayout_2)
 
@@ -649,6 +652,7 @@ class Ui_MainWindow(object):
 
         self.frame_3 = QFrame(self.centralwidget)
         self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.frame_3.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_3)
@@ -662,124 +666,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.lr_angle, 0, 1, 1, 1)
 
-        self.pb_setPos3 = QPushButton(self.frame_3)
-        self.bg_send = QButtonGroup(MainWindow)
-        self.bg_send.setObjectName(u"bg_send")
-        self.bg_send.addButton(self.pb_setPos3)
-        self.pb_setPos3.setObjectName(u"pb_setPos3")
-
-        self.gridLayout.addWidget(self.pb_setPos3, 6, 2, 1, 1)
-
-        self.sb_genFreq = QSpinBox(self.frame_3)
-        self.sb_genFreq.setObjectName(u"sb_genFreq")
-        self.sb_genFreq.setWrapping(False)
-        self.sb_genFreq.setMinimum(1)
-
-        self.gridLayout.addWidget(self.sb_genFreq, 1, 1, 1, 1)
-
-        self.label_2 = QLabel(self.frame_3)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font)
-
-        self.gridLayout.addWidget(self.label_2, 5, 0, 1, 1)
-
-        self.le_setPos1 = QLineEdit(self.frame_3)
-        self.le_setPos1.setObjectName(u"le_setPos1")
-        self.le_setPos1.setFont(font1)
-
-        self.gridLayout.addWidget(self.le_setPos1, 4, 3, 1, 1)
-
-        self.label_3 = QLabel(self.frame_3)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setFont(font)
-
-        self.gridLayout.addWidget(self.label_3, 6, 0, 1, 1)
-
-        self.label_14 = QLabel(self.frame_3)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setFont(font)
-
-        self.gridLayout.addWidget(self.label_14, 0, 2, 1, 1)
-
-        self.cb_enable = QCheckBox(self.frame_3)
-        self.cb_enable.setObjectName(u"cb_enable")
-
-        self.gridLayout.addWidget(self.cb_enable, 4, 1, 1, 1)
-
-        self.le_setPos2 = QLineEdit(self.frame_3)
-        self.le_setPos2.setObjectName(u"le_setPos2")
-        self.le_setPos2.setFont(font1)
-
-        self.gridLayout.addWidget(self.le_setPos2, 5, 3, 1, 1)
-
-        self.cb_degrees = QCheckBox(self.frame_3)
-        self.cb_degrees.setObjectName(u"cb_degrees")
-
-        self.gridLayout.addWidget(self.cb_degrees, 0, 3, 1, 1)
-
-        self.le_setPos3 = QLineEdit(self.frame_3)
-        self.le_setPos3.setObjectName(u"le_setPos3")
-        self.le_setPos3.setFont(font1)
-
-        self.gridLayout.addWidget(self.le_setPos3, 6, 3, 1, 1)
-
-        self.pb_setPos1 = QPushButton(self.frame_3)
-        self.bg_send.addButton(self.pb_setPos1)
-        self.pb_setPos1.setObjectName(u"pb_setPos1")
-
-        self.gridLayout.addWidget(self.pb_setPos1, 4, 2, 1, 1)
-
-        self.label_13 = QLabel(self.frame_3)
-        self.label_13.setObjectName(u"label_13")
-        self.label_13.setFont(font)
-
-        self.gridLayout.addWidget(self.label_13, 0, 0, 1, 1)
-
-        self.label = QLabel(self.frame_3)
-        self.label.setObjectName(u"label")
-        self.label.setFont(font)
-
-        self.gridLayout.addWidget(self.label, 4, 0, 1, 1)
-
-        self.pb_setPos2 = QPushButton(self.frame_3)
-        self.bg_send.addButton(self.pb_setPos2)
-        self.pb_setPos2.setObjectName(u"pb_setPos2")
-
-        self.gridLayout.addWidget(self.pb_setPos2, 5, 2, 1, 1)
-
-        self.l_pps = QLabel(self.frame_3)
-        self.l_pps.setObjectName(u"l_pps")
-
-        self.gridLayout.addWidget(self.l_pps, 7, 3, 1, 1)
-
-        self.le_setPos = QLineEdit(self.frame_3)
-        self.le_setPos.setObjectName(u"le_setPos")
-        self.le_setPos.setFont(font1)
-
-        self.gridLayout.addWidget(self.le_setPos, 6, 1, 1, 1)
-
-        self.pb_gen = QPushButton(self.frame_3)
-        self.pb_gen.setObjectName(u"pb_gen")
-        self.pb_gen.setCheckable(True)
-
-        self.gridLayout.addWidget(self.pb_gen, 1, 0, 1, 1)
-
         self.sb_genAmpl = QSpinBox(self.frame_3)
         self.sb_genAmpl.setObjectName(u"sb_genAmpl")
         self.sb_genAmpl.setMinimum(1)
 
         self.gridLayout.addWidget(self.sb_genAmpl, 1, 2, 1, 1)
-
-        self.cb_mode = QCheckBox(self.frame_3)
-        self.cb_mode.setObjectName(u"cb_mode")
-
-        self.gridLayout.addWidget(self.cb_mode, 5, 1, 1, 1)
-
-        self.pb_send = QPushButton(self.frame_3)
-        self.bg_send.addButton(self.pb_send)
-        self.pb_send.setObjectName(u"pb_send")
-
-        self.gridLayout.addWidget(self.pb_send, 7, 0, 1, 2)
 
         self.label_11 = QLabel(self.frame_3)
         self.label_11.setObjectName(u"label_11")
@@ -788,24 +679,144 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label_11, 2, 0, 1, 4)
 
+        self.pb_send = QPushButton(self.frame_3)
+        self.bg_send = QButtonGroup(MainWindow)
+        self.bg_send.setObjectName(u"bg_send")
+        self.bg_send.addButton(self.pb_send)
+        self.pb_send.setObjectName(u"pb_send")
+
+        self.gridLayout.addWidget(self.pb_send, 7, 0, 1, 2)
+
+        self.l_pps = QLabel(self.frame_3)
+        self.l_pps.setObjectName(u"l_pps")
+
+        self.gridLayout.addWidget(self.l_pps, 7, 3, 1, 1)
+
+        self.pb_gen = QPushButton(self.frame_3)
+        self.pb_gen.setObjectName(u"pb_gen")
+        self.pb_gen.setCheckable(True)
+
+        self.gridLayout.addWidget(self.pb_gen, 1, 0, 1, 1)
+
+        self.sb_genFreq = QSpinBox(self.frame_3)
+        self.sb_genFreq.setObjectName(u"sb_genFreq")
+        self.sb_genFreq.setWrapping(False)
+        self.sb_genFreq.setMinimum(1)
+
+        self.gridLayout.addWidget(self.sb_genFreq, 1, 1, 1, 1)
+
+        self.cb_degrees = QCheckBox(self.frame_3)
+        self.cb_degrees.setObjectName(u"cb_degrees")
+
+        self.gridLayout.addWidget(self.cb_degrees, 0, 3, 1, 1)
+
+        self.label_13 = QLabel(self.frame_3)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setFont(font)
+
+        self.gridLayout.addWidget(self.label_13, 0, 0, 1, 1)
+
+        self.label_14 = QLabel(self.frame_3)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setFont(font)
+
+        self.gridLayout.addWidget(self.label_14, 0, 2, 1, 1)
+
+        self.label = QLabel(self.frame_3)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font)
+
+        self.gridLayout.addWidget(self.label, 3, 0, 1, 1)
+
+        self.cb_enable = QCheckBox(self.frame_3)
+        self.cb_enable.setObjectName(u"cb_enable")
+
+        self.gridLayout.addWidget(self.cb_enable, 3, 1, 1, 1)
+
+        self.pb_setPos1 = QPushButton(self.frame_3)
+        self.bg_send.addButton(self.pb_setPos1)
+        self.pb_setPos1.setObjectName(u"pb_setPos1")
+
+        self.gridLayout.addWidget(self.pb_setPos1, 3, 2, 1, 1)
+
+        self.label_2 = QLabel(self.frame_3)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setFont(font)
+
+        self.gridLayout.addWidget(self.label_2, 4, 0, 1, 1)
+
+        self.label_3 = QLabel(self.frame_3)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setFont(font)
+
+        self.gridLayout.addWidget(self.label_3, 5, 0, 1, 1)
+
+        self.cb_appMode = QComboBox(self.frame_3)
+        self.cb_appMode.addItem("")
+        self.cb_appMode.addItem("")
+        self.cb_appMode.setObjectName(u"cb_appMode")
+
+        self.gridLayout.addWidget(self.cb_appMode, 4, 1, 1, 1)
+
+        self.le_setPos = QLineEdit(self.frame_3)
+        self.le_setPos.setObjectName(u"le_setPos")
+        self.le_setPos.setFont(font1)
+
+        self.gridLayout.addWidget(self.le_setPos, 5, 1, 1, 1)
+
+        self.pb_setPos2 = QPushButton(self.frame_3)
+        self.bg_send.addButton(self.pb_setPos2)
+        self.pb_setPos2.setObjectName(u"pb_setPos2")
+
+        self.gridLayout.addWidget(self.pb_setPos2, 4, 2, 1, 1)
+
+        self.pb_setPos3 = QPushButton(self.frame_3)
+        self.bg_send.addButton(self.pb_setPos3)
+        self.pb_setPos3.setObjectName(u"pb_setPos3")
+
+        self.gridLayout.addWidget(self.pb_setPos3, 5, 2, 1, 1)
+
+        self.le_setPos1 = QLineEdit(self.frame_3)
+        self.le_setPos1.setObjectName(u"le_setPos1")
+        self.le_setPos1.setFont(font1)
+
+        self.gridLayout.addWidget(self.le_setPos1, 3, 3, 1, 1)
+
+        self.le_setPos2 = QLineEdit(self.frame_3)
+        self.le_setPos2.setObjectName(u"le_setPos2")
+        self.le_setPos2.setFont(font1)
+
+        self.gridLayout.addWidget(self.le_setPos2, 4, 3, 1, 1)
+
+        self.le_setPos3 = QLineEdit(self.frame_3)
+        self.le_setPos3.setObjectName(u"le_setPos3")
+        self.le_setPos3.setFont(font1)
+
+        self.gridLayout.addWidget(self.le_setPos3, 5, 3, 1, 1)
+
+        self.label_17 = QLabel(self.frame_3)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setFont(font)
+
+        self.gridLayout.addWidget(self.label_17, 6, 0, 1, 1)
+
+        self.cb_arr = QComboBox(self.frame_3)
+        self.cb_arr.addItem("")
+        self.cb_arr.addItem("")
+        self.cb_arr.addItem("")
+        self.cb_arr.setObjectName(u"cb_arr")
+
+        self.gridLayout.addWidget(self.cb_arr, 6, 1, 1, 1)
+
         self.pb_arr = QPushButton(self.frame_3)
         self.pb_arr.setObjectName(u"pb_arr")
-        self.pb_arr.setCheckable(True)
+        self.pb_arr.setEnabled(True)
+        self.pb_arr.setCheckable(False)
         self.pb_arr.setAutoExclusive(False)
 
-        self.gridLayout.addWidget(self.pb_arr, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.pb_arr, 6, 2, 1, 1)
 
-        self.pb_rarr = QPushButton(self.frame_3)
-        self.pb_rarr.setObjectName(u"pb_rarr")
-        self.pb_rarr.setCheckable(True)
-        self.pb_rarr.setAutoExclusive(False)
-
-        self.gridLayout.addWidget(self.pb_rarr, 3, 2, 1, 1)
-
-        self.gridLayout.setColumnStretch(0, 50)
-        self.gridLayout.setColumnStretch(1, 50)
-        self.gridLayout.setColumnStretch(2, 50)
-        self.gridLayout.setColumnStretch(3, 50)
+        self.gridLayout.setColumnMinimumWidth(3, 80)
 
         self.horizontalLayout_4.addLayout(self.gridLayout)
 
@@ -814,6 +825,7 @@ class Ui_MainWindow(object):
 
         self.frame_2 = QFrame(self.centralwidget)
         self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.frame_2)
@@ -940,7 +952,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1667, 33))
+        self.menubar.setGeometry(QRect(0, 0, 1699, 33))
         self.menuCalls = QMenu(self.menubar)
         self.menuCalls.setObjectName(u"menuCalls")
         self.menuTools = QMenu(self.menubar)
@@ -1016,9 +1028,9 @@ class Ui_MainWindow(object):
         self.cb_ampSelect.setItemText(3, QCoreApplication.translate("MainWindow", u"Y1", None))
         self.cb_ampSelect.setItemText(4, QCoreApplication.translate("MainWindow", u"Y2", None))
 
-        self.cb_mtMode.setItemText(0, QCoreApplication.translate("MainWindow", u"OPEN", None))
-        self.cb_mtMode.setItemText(1, QCoreApplication.translate("MainWindow", u"CLOSE", None))
-        self.cb_mtMode.setItemText(2, QCoreApplication.translate("MainWindow", u"FOC", None))
+        self.cb_mtMode.setItemText(0, QCoreApplication.translate("MainWindow", u"DRIVER_OPEN", None))
+        self.cb_mtMode.setItemText(1, QCoreApplication.translate("MainWindow", u"DRIVER_CLOSE", None))
+        self.cb_mtMode.setItemText(2, QCoreApplication.translate("MainWindow", u"DRIVER_FOC", None))
 
         self.pb_pidUpdateConf.setText(QCoreApplication.translate("MainWindow", u"UPDATE", None))
         self.pb_pidSaveConf.setText(QCoreApplication.translate("MainWindow", u"SAVE", None))
@@ -1038,35 +1050,41 @@ class Ui_MainWindow(object):
         self.pb_genSaveConf.setText(QCoreApplication.translate("MainWindow", u"SAVE", None))
         self.label_37.setText(QCoreApplication.translate("MainWindow", u"Range", None))
         self.label_38.setText(QCoreApplication.translate("MainWindow", u"RESERVE", None))
-        self.label_39.setText(QCoreApplication.translate("MainWindow", u"RESERVE", None))
+        self.label_39.setText(QCoreApplication.translate("MainWindow", u"Arr zero shift", None))
         self.label_40.setText(QCoreApplication.translate("MainWindow", u"Update", None))
         self.label_41.setText(QCoreApplication.translate("MainWindow", u"Zero shift", None))
         self.label_42.setText(QCoreApplication.translate("MainWindow", u"RESERVE", None))
         self.label_43.setText(QCoreApplication.translate("MainWindow", u"RESERVE", None))
         self.label_44.setText(QCoreApplication.translate("MainWindow", u"CONFIG GENERAL", None))
         self.label_45.setText(QCoreApplication.translate("MainWindow", u"Read", None))
-        self.label_46.setText(QCoreApplication.translate("MainWindow", u"RESERVE", None))
+        self.label_46.setText(QCoreApplication.translate("MainWindow", u"AMP ID", None))
         self.pb_genUpdateConf.setText(QCoreApplication.translate("MainWindow", u"UPDATE", None))
         self.pb_genReadConf.setText(QCoreApplication.translate("MainWindow", u"READ", None))
-        self.pb_setPos3.setText(QCoreApplication.translate("MainWindow", u"SetPos 3", None))
-        self.sb_genFreq.setSuffix(QCoreApplication.translate("MainWindow", u" Hz", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Mode:", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Set Pos:", None))
-        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Degrees:", None))
-        self.cb_enable.setText("")
-        self.cb_degrees.setText("")
-        self.pb_setPos1.setText(QCoreApplication.translate("MainWindow", u"SetPos 1", None))
-        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Angle:", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Enable:", None))
-        self.pb_setPos2.setText(QCoreApplication.translate("MainWindow", u"SetPos 2", None))
+        self.sb_genAmpl.setSuffix(QCoreApplication.translate("MainWindow", u" \u00b0", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"CONTROL", None))
+        self.pb_send.setText(QCoreApplication.translate("MainWindow", u"SEND", None))
         self.l_pps.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.pb_gen.setText(QCoreApplication.translate("MainWindow", u"GEN", None))
-        self.sb_genAmpl.setSuffix(QCoreApplication.translate("MainWindow", u" \u00b0", None))
-        self.cb_mode.setText("")
-        self.pb_send.setText(QCoreApplication.translate("MainWindow", u"SEND", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"CONTROL", None))
-        self.pb_arr.setText(QCoreApplication.translate("MainWindow", u"ARR", None))
-        self.pb_rarr.setText(QCoreApplication.translate("MainWindow", u"RARR", None))
+        self.sb_genFreq.setSuffix(QCoreApplication.translate("MainWindow", u" Hz", None))
+        self.cb_degrees.setText("")
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Angle:", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Degrees:", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Enable:", None))
+        self.cb_enable.setText("")
+        self.pb_setPos1.setText(QCoreApplication.translate("MainWindow", u"SetPos 1", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"App Mode:", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Set Pos:", None))
+        self.cb_appMode.setItemText(0, QCoreApplication.translate("MainWindow", u"APP_OPEN", None))
+        self.cb_appMode.setItemText(1, QCoreApplication.translate("MainWindow", u"APP_CLOSE", None))
+
+        self.pb_setPos2.setText(QCoreApplication.translate("MainWindow", u"SetPos 2", None))
+        self.pb_setPos3.setText(QCoreApplication.translate("MainWindow", u"SetPos 3", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Arr Mode:", None))
+        self.cb_arr.setItemText(0, QCoreApplication.translate("MainWindow", u"NONE", None))
+        self.cb_arr.setItemText(1, QCoreApplication.translate("MainWindow", u"ARR", None))
+        self.cb_arr.setItemText(2, QCoreApplication.translate("MainWindow", u"RARR", None))
+
+        self.pb_arr.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Plot 2", None))
         self.lineEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Plot 1", None))
         self.radioButton_5.setText("")
