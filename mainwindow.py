@@ -18,6 +18,7 @@ BUFFER_SIZE = 1000
 def to_b16t(i):
     r = bytearray()
     for e in i:
+        print(e)
         if e<0:
             r += e.to_bytes(2, 'little', signed=True)
         else:
@@ -439,7 +440,7 @@ class MainWindow(QMainWindow):
                 self.prev_pos = self.pos
                 self.pos = buffer_temp[2]
 
-                angle = buffer_temp[4]
+                angle = buffer_temp[2]
                 if self.m_ui.cb_degrees.isChecked():
                     angle /= 91
 
@@ -447,11 +448,12 @@ class MainWindow(QMainWindow):
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
 
                 self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[6] else "OPEN")
-                self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(92, 179, 56)" if buffer_temp[6] else "rgb(251, 65, 65)"))
+                self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(251, 65, 65)" if buffer_temp[6] else "rgb(92, 179, 56)"))
 
 
     @Slot(int)
     def send_data(self, btn_id: int):
+        print(btn_id)
         self.send_buffer[0] = 0x6788
         self.send_buffer[1] = self.m_ui.cb_enable.isChecked()
         self.send_buffer[2] = self.m_ui.cb_appMode.currentIndex()
@@ -470,24 +472,26 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def send_disable(self):
-        self.send_buffer[0] = 0x6788
-        self.send_buffer[1] = 0
+        self.m_ui.cb_enable.setChecked(False)
+        self.send_data(0)
 
-        buffer = QByteArray(to_b16t(self.send_buffer))
-        self.m_serial.write(buffer)
+        # buffer = QByteArray(to_b16t(self.send_buffer))
+        # self.m_serial.write(buffer)
 
     def start_buffer_to_send(self, header):
+        headers = [0x8849, 0x8850, 0x8949, 0x8950]
+
         if self.m_ui.cb_ampSelect.currentIndex() == 0:
             self.send_buffer[0] = header
 
             buffer = QByteArray(to_b16t(self.send_buffer))
 
         else:
-            self.uart_buffer[0] = int(
-                str(ord(self.m_ui.cb_ampSelect.currentText()[0])) + str(ord(self.m_ui.cb_ampSelect.currentText()[1])))
+            self.uart_buffer[0] = headers[self.m_ui.cb_ampSelect.currentIndex()-1]
             self.uart_buffer[1] = header
 
             buffer = QByteArray(to_b16t(self.uart_buffer))
+
 
         return buffer
 
@@ -532,7 +536,7 @@ class MainWindow(QMainWindow):
 
         buffer = self.start_buffer_to_send(header)
 
-        #print(buffer)
+        print(buffer)
         self.m_serial.write(buffer)
 
 
