@@ -18,7 +18,6 @@ BUFFER_SIZE = 1000
 def to_b16t(i):
     r = bytearray()
     for e in i:
-        print(e)
         if e<0:
             r += e.to_bytes(2, 'little', signed=True)
         else:
@@ -411,7 +410,10 @@ class MainWindow(QMainWindow):
     @Slot()
     def read_data(self):
         self.pps += 1
-        buffer_temp = np.array(array.array('h', bytes(self.m_serial.readAll())))
+        b = self.m_serial.readAll()
+        print(b)
+        buffer_temp = np.array(array.array('h', bytes(b)))
+
         #buffer_temp = np.array(array.array('h', bytes(data)))
 
         self.packets += 1
@@ -428,11 +430,11 @@ class MainWindow(QMainWindow):
 
         self.prev_time = time.time()
 
-
+        print(buffer_temp)
         match int(buffer_temp[0]) & 0xffff:
             case 0x8277 | 0x8280 | 0x8288 | 0x7777 | 0x7780 | 0x7788:
                 self.update_config(buffer_temp)
-            case 0x6700:
+            case 0x6788:
 
                 buffer_temp_pl = buffer_temp[1:6]
                 self.plot.update_buffer_y(buffer_temp_pl)
@@ -450,34 +452,6 @@ class MainWindow(QMainWindow):
                 self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[6] else "OPEN")
                 self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(251, 65, 65)" if buffer_temp[6] else "rgb(92, 179, 56)"))
 
-
-    @Slot(int)
-    def send_data(self, btn_id: int):
-        print(btn_id)
-        self.send_buffer[0] = 0x6788
-        self.send_buffer[1] = self.m_ui.cb_enable.isChecked()
-        self.send_buffer[2] = self.m_ui.cb_appMode.currentIndex()
-        self.send_buffer[3] = int(self.le_list[btn_id].text())
-        self.send_buffer[4] = self.m_ui.cb_arr.currentIndex()
-        # if self.m_ui.pb_arr.isChecked() and self.m_ui.pb_rarr.isChecked():
-        #     self.send_buffer[4] = 0
-        # elif self.m_ui.pb_arr.isChecked():
-        #     self.send_buffer[4] = 1
-        #     print("arr")
-        # elif self.m_ui.pb_rarr.isChecked():
-        #     self.send_buffer[4] = 2
-
-        buffer = QByteArray(to_b16t(self.send_buffer))
-        self.m_serial.write(buffer)
-
-    @Slot()
-    def send_disable(self):
-        self.m_ui.cb_enable.setChecked(False)
-        self.send_data(0)
-
-        # buffer = QByteArray(to_b16t(self.send_buffer))
-        # self.m_serial.write(buffer)
-
     def start_buffer_to_send(self, header):
         headers = [0x8849, 0x8850, 0x8949, 0x8950]
 
@@ -494,6 +468,56 @@ class MainWindow(QMainWindow):
 
 
         return buffer
+
+    @Slot(int)
+    def send_data(self, btn_id: int):
+
+        sbuffer = [0 for _ in range(7)]
+
+        header = 0x6788
+
+
+        sbuffer[0] = self.m_ui.cb_enable.isChecked()
+        sbuffer[1] = self.m_ui.cb_appMode.currentIndex()
+        sbuffer[2] = int(self.le_list[btn_id].text())
+        sbuffer[3] = self.m_ui.cb_arr.currentIndex()
+
+        self.start_buffer_to_send(header)
+
+        match self.m_ui.cb_ampSelect.currentIndex():
+            case 0:
+                self.send_buffer[1:7] = sbuffer
+                buffer = QByteArray(to_b16t(self.send_buffer))
+            case 1 | 2 | 3 | 4 :
+                self.uart_buffer[2:] = sbuffer
+                buffer = QByteArray(to_b16t(self.uart_buffer))
+
+        # print(btn_id)
+        # self.send_buffer[0] = 0x6788
+        # self.send_buffer[1] = self.m_ui.cb_enable.isChecked()
+        # self.send_buffer[2] = self.m_ui.cb_appMode.currentIndex()
+        # self.send_buffer[3] = int(self.le_list[btn_id].text())
+        # self.send_buffer[4] = self.m_ui.cb_arr.currentIndex()
+        # if self.m_ui.pb_arr.isChecked() and self.m_ui.pb_rarr.isChecked():
+        #     self.send_buffer[4] = 0
+        # elif self.m_ui.pb_arr.isChecked():
+        #     self.send_buffer[4] = 1
+        #     print("arr")
+        # elif self.m_ui.pb_rarr.isChecked():
+        #     self.send_buffer[4] = 2
+
+        #buffer = QByteArray(to_b16t(self.send_buffer))
+        self.m_serial.write(buffer)
+
+    @Slot()
+    def send_disable(self):
+        self.m_ui.cb_enable.setChecked(False)
+        self.send_data(0)
+
+        # buffer = QByteArray(to_b16t(self.send_buffer))
+        # self.m_serial.write(buffer)
+
+
 
     @Slot()
     def send_read_mem(self, btn):
@@ -536,14 +560,13 @@ class MainWindow(QMainWindow):
 
         buffer = self.start_buffer_to_send(header)
 
-        print(buffer)
+        #print(buffer)
         self.m_serial.write(buffer)
 
 
     @Slot()
     def send_config_save(self, btn):
         header = 0
-        print(btn.objectName())
 
         match btn.objectName():
             case "pb_mSaveConf":
