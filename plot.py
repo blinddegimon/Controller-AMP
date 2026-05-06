@@ -21,17 +21,14 @@ class CustomViewBox(pg.ViewBox):
 
     def mouseClickEvent(self, ev):
         if ev.button() == Qt.MouseButton.MiddleButton:
-            self.show_custom_menu(ev)
+            ev._button = Qt.MouseButton.RightButton
+            super().mouseClickEvent(ev)
             ev.accept()
         elif ev.button() == Qt.MouseButton.RightButton:
             self.enableAutoRange()
             ev.accept()
         else:
             super().mouseClickEvent(ev)
-
-    def show_custom_menu(self, ev):
-        menu = self.getMenu(ev)  # default pyqtgraph menu
-        menu.popup(ev.screenPos().toPoint())
 
 class Plot(PlotWidget):
 
