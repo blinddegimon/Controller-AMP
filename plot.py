@@ -8,6 +8,8 @@ import array
 
 BUFFER_SIZE = 2000
 
+
+
 def to_b16t(i):
     r = bytearray()
     for e in i:

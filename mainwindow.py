@@ -411,7 +411,7 @@ class MainWindow(QMainWindow):
     def read_data(self):
         self.pps += 1
         b = self.m_serial.readAll()
-        print(b)
+        #print(b)
         buffer_temp = np.array(array.array('h', bytes(b)))
 
         #buffer_temp = np.array(array.array('h', bytes(data)))
@@ -430,7 +430,7 @@ class MainWindow(QMainWindow):
 
         self.prev_time = time.time()
 
-        print(buffer_temp)
+        #print(buffer_temp)
         match int(buffer_temp[0]) & 0xffff:
             case 0x8277 | 0x8280 | 0x8288 | 0x7777 | 0x7780 | 0x7788:
                 self.update_config(buffer_temp)
@@ -537,7 +537,6 @@ class MainWindow(QMainWindow):
 
         buffer = self.start_buffer_to_send(header)
 
-        #print(buffer)
         self.m_serial.write(buffer)
 
 
@@ -599,9 +598,9 @@ class MainWindow(QMainWindow):
 
             case "pb_pidUpdateConf":
                 header = 0x8780
-                sbuffer[0] = int(float(self.m_ui.le_posP.text()) * 1000)
-                sbuffer[1] = int(float(self.m_ui.le_posD.text()) * 1000)
-                sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 1000)
+                sbuffer[0] = int(float(self.m_ui.le_posP.text()) * 10)
+                sbuffer[1] = int(float(self.m_ui.le_posD.text()) * 10)
+                sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 10)
                 sbuffer[3] = int(float(self.m_ui.le_spP.text()) * 1000)
                 sbuffer[4] = int(float(self.m_ui.le_spI.text()) * 1000)
                 sbuffer[5] = int(float(self.m_ui.le_spSat.text()) * 1000)

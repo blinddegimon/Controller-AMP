@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowVeuHFi.ui'
+## Form generated from reading UI file 'mainwindowTswxTh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1699, 812)
+        MainWindow.resize(1744, 812)
         MainWindow.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.actionConnect = QAction(MainWindow)
         self.actionConnect.setObjectName(u"actionConnect")
@@ -47,6 +47,7 @@ class Ui_MainWindow(object):
         self.actionClear.setMenuRole(QAction.MenuRole.NoRole)
         self.actionPause = QAction(MainWindow)
         self.actionPause.setObjectName(u"actionPause")
+        self.actionPause.setCheckable(True)
         icon3 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackPause))
         self.actionPause.setIcon(icon3)
         self.actionPause.setMenuRole(QAction.MenuRole.NoRole)
@@ -952,7 +953,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1699, 33))
+        self.menubar.setGeometry(QRect(0, 0, 1744, 33))
         self.menuCalls = QMenu(self.menubar)
         self.menuCalls.setObjectName(u"menuCalls")
         self.menuTools = QMenu(self.menubar)

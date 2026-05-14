@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1699</width>
+    <width>1744</width>
     <height>812</height>
    </rect>
   </property>
@@ -1577,7 +1577,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1699</width>
+     <width>1744</width>
      <height>33</height>
     </rect>
    </property>
@@ -1658,6 +1658,9 @@
    </property>
   </action>
   <action name="actionPause">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset theme="QIcon::ThemeIcon::MediaPlaybackPause"/>
    </property>
@@ -1695,20 +1698,20 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="bg_read"/>
-  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_readM"/>
   <buttongroup name="bg_clrPlots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="bg_update"/>
+  <buttongroup name="bg_read"/>
+  <buttongroup name="bg_save"/>
   <buttongroup name="bg_send"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="bg_readM"/>
-  <buttongroup name="bg_update"/>
  </buttongroups>
 </ui>

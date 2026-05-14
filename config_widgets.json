@@ -32,12 +32,12 @@
     "le_res_6": "1",
     "radioButton": true,
     "lineEdit": "",
-    "radioButton_2": false,
+    "radioButton_2": true,
     "lineEdit_2": "",
-    "radioButton_3": false,
+    "radioButton_3": true,
     "lineEdit_3": "",
-    "radioButton_4": false,
+    "radioButton_4": true,
     "lineEdit_4": "",
-    "radioButton_5": false,
+    "radioButton_5": true,
     "lineEdit_5": ""
 }
