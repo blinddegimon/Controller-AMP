@@ -656,9 +656,9 @@ class MainWindow(QMainWindow):
                 self.m_ui.lr_mtMode.setText(motor_mode(data[7]))
 
             case 0x8280 | 0x7780:
-                self.m_ui.lr_posP.setText(str(data[1]/1000))
-                self.m_ui.lr_posD.setText(str(data[2] / 1000))
-                self.m_ui.lr_posSat.setText(str(data[3] / 1000))
+                self.m_ui.lr_posP.setText(str(data[1]/10))
+                self.m_ui.lr_posD.setText(str(data[2] / 10))
+                self.m_ui.lr_posSat.setText(str(data[3] / 10))
                 self.m_ui.lr_spP.setText(str(data[4] / 1000))
                 self.m_ui.lr_spI.setText(str(data[5] / 1000))
                 self.m_ui.lr_spSat.setText(str(data[6] / 1000))
