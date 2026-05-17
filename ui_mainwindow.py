@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowTswxTh.ui'
+## Form generated from reading UI file 'mainwindowgJqSeL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -56,6 +56,18 @@ class Ui_MainWindow(object):
         icon4 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackStop))
         self.actionStop.setIcon(icon4)
         self.actionStop.setMenuRole(QAction.MenuRole.NoRole)
+        self.actionExport_data = QAction(MainWindow)
+        self.actionExport_data.setObjectName(u"actionExport_data")
+        icon5 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DocumentNew))
+        self.actionExport_data.setIcon(icon5)
+        self.actionExport_data.setMenuRole(QAction.MenuRole.NoRole)
+        self.actionDownload_path = QAction(MainWindow)
+        self.actionDownload_path.setObjectName(u"actionDownload_path")
+        self.actionfastScreenShot = QAction(MainWindow)
+        self.actionfastScreenShot.setObjectName(u"actionfastScreenShot")
+        icon6 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.CameraPhoto))
+        self.actionfastScreenShot.setIcon(icon6)
+        self.actionfastScreenShot.setMenuRole(QAction.MenuRole.NoRole)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_3 = QGridLayout(self.centralwidget)
@@ -971,11 +983,14 @@ class Ui_MainWindow(object):
         self.menuCalls.addAction(self.actionConnect)
         self.menuCalls.addAction(self.actionDisconnect)
         self.menuTools.addAction(self.actionConfigure)
+        self.menuTools.addAction(self.actionDownload_path)
         self.toolBar.addAction(self.actionConnect)
         self.toolBar.addAction(self.actionDisconnect)
         self.toolBar.addAction(self.actionClear)
         self.toolBar.addAction(self.actionPause)
         self.toolBar.addAction(self.actionStop)
+        self.toolBar.addAction(self.actionExport_data)
+        self.toolBar.addAction(self.actionfastScreenShot)
 
         self.retranslateUi(MainWindow)
 
@@ -984,7 +999,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.actionConnect.setText(QCoreApplication.translate("MainWindow", u"Conncect", None))
+        self.actionConnect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.actionDisconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
         self.actionSettings.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.actionConfigure.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
@@ -1008,6 +1023,21 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(shortcut)
         self.actionStop.setShortcut(QCoreApplication.translate("MainWindow", u"Esc", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionExport_data.setText(QCoreApplication.translate("MainWindow", u"Export data ", None))
+#if QT_CONFIG(tooltip)
+        self.actionExport_data.setToolTip(QCoreApplication.translate("MainWindow", u"Export data in csv", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(shortcut)
+        self.actionExport_data.setShortcut(QCoreApplication.translate("MainWindow", u"E", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionDownload_path.setText(QCoreApplication.translate("MainWindow", u"Download path", None))
+        self.actionfastScreenShot.setText(QCoreApplication.translate("MainWindow", u"fastScreenShot", None))
+#if QT_CONFIG(tooltip)
+        self.actionfastScreenShot.setToolTip(QCoreApplication.translate("MainWindow", u"Take imidiate screenshot of entire app", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(shortcut)
+        self.actionfastScreenShot.setShortcut(QCoreApplication.translate("MainWindow", u"S", None))
 #endif // QT_CONFIG(shortcut)
         self.pb_mReadMem.setText(QCoreApplication.translate("MainWindow", u"READ mem", None))
         self.pb_mSaveConf.setText(QCoreApplication.translate("MainWindow", u"SAVE", None))

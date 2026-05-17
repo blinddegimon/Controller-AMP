@@ -1,5 +1,5 @@
 from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread, QObject, Signal, QLocale
-from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton, QSpinBox
+from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton, QSpinBox, QFileDialog
 from PySide6.QtSerialPort import QSerialPort
 from PySide6.QtGui import QShortcut, QIntValidator, QDoubleValidator
 
@@ -12,6 +12,9 @@ import array
 import json
 import plot as plt
 import time
+import csv
+import datetime
+import numpy
 
 BUFFER_SIZE = 1000
 
@@ -105,6 +108,8 @@ class AppConfig:
                 #print("QComboBox")
             case QSpinBox():
                 value = widget.value()
+            case QFileDialog():
+                value = str(widget.directory().path())
             case _:
                 print("something went wrong")
 
@@ -125,6 +130,8 @@ class AppConfig:
                 #print("QComboBox")
             case QSpinBox():
                 widget.setValue(value)
+            case QFileDialog():
+                widget.setDirectory(value)
             case _:
                 print("something went wrong")
 
@@ -134,6 +141,9 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
 
         self.setFocus()
+
+        self.downloadPath = QFileDialog()
+        self.downloadPath.setObjectName("fd_downloadPath")
 
 
         self.timer = QTimer()
@@ -192,6 +202,8 @@ class MainWindow(QMainWindow):
 
         self.shortcut_auto_range = QShortcut(self)
         self.shortcut_auto_range.setKey('r')
+
+
 
         self.config_settings.add_widget(self.m_ui.cb_degrees)
 
@@ -253,6 +265,7 @@ class MainWindow(QMainWindow):
         self.config_settings.add_widget(self.m_ui.radioButton_5)
         self.config_settings.add_widget(self.m_ui.lineEdit_5)
 
+        self.config_settings.add_widget(self.downloadPath)
 
 
         #self.config_settings.load_widgets()
@@ -315,6 +328,9 @@ class MainWindow(QMainWindow):
         self.m_ui.bg_plots.idClicked.connect(self.plot.update_plot_list)
         #self.shortcut_update.activated.connect(self.m_ui.pb_updateConf.click)
         self.shortcut_auto_range.activated.connect(self.auto_range)
+        self.m_ui.actionExport_data.triggered.connect(self.export_data)
+        self.m_ui.actionfastScreenShot.triggered.connect(self.takeScreenShot)
+        self.m_ui.actionDownload_path.triggered.connect(self.openFialDialog)
 
         self.m_ui.actionConnect.setEnabled(True)
         self.m_ui.actionDisconnect.setEnabled(False)
@@ -603,7 +619,7 @@ class MainWindow(QMainWindow):
                 sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 10)
                 sbuffer[3] = int(float(self.m_ui.le_spP.text()) * 1000)
                 sbuffer[4] = int(float(self.m_ui.le_spI.text()) * 1000)
-                sbuffer[5] = int(float(self.m_ui.le_spSat.text()) * 1000)
+                sbuffer[5] = int(float(self.m_ui.le_spSat.text()) * 10)
                 sbuffer[6] = int(self.m_ui.le_res.text())
 
             case "pb_genUpdateConf":
@@ -661,7 +677,7 @@ class MainWindow(QMainWindow):
                 self.m_ui.lr_posSat.setText(str(data[3] / 10))
                 self.m_ui.lr_spP.setText(str(data[4] / 1000))
                 self.m_ui.lr_spI.setText(str(data[5] / 1000))
-                self.m_ui.lr_spSat.setText(str(data[6] / 1000))
+                self.m_ui.lr_spSat.setText(str(data[6] / 10))
                 self.m_ui.lr_res.setText(str(data[7]))
 
             case 0x8288 | 0x7788:
@@ -710,3 +726,48 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         self.config_settings.save_widgets()
 
+    @Slot()
+    def openFialDialog(self):
+        path = self.downloadPath.getExistingDirectory(self, caption="Select Directory to export data")
+
+
+        print(path)
+        self.downloadPath.setDirectory(path)
+
+    @Slot()
+    def export_data(self):
+        file_name = datetime.datetime.now().strftime("%Y-%m-%d %H_%M_%S")
+        file_name =  file_name + '.csv'
+        file_name = str(self.downloadPath.directory().path()) + '/' + file_name
+
+
+        row = ["variable", "value"]
+        names = ["PWM", "Q", "D", "El zero shift", "Ph step", "Ph acc", "Motor mode",
+                 "POS P", "POS D", "POS Sat", "SP P", "SP I", "SP Sat", "RESERVE",
+                 "Zero shift", "Range", "Arr zero shift", "RESERVE", "RESERVE", "RESERVE", "AMP ID"]
+
+        values = [self.m_ui.le_pwm.text(), self.m_ui.le_Q.text(), self.m_ui.le_D.text(), self.m_ui.le_elZeroShift.text(), self.m_ui.le_phStep.text(), self.m_ui.le_phAcc.text(), self.m_ui.cb_mtMode.currentText(),
+                  self.m_ui.le_posP.text(), self.m_ui.le_posD.text(), self.m_ui.le_posSat.text(), self.m_ui.le_spP.text(), self.m_ui.le_spI.text(), self.m_ui.le_spSat.text(), self.m_ui.le_res.text(),
+                  self.m_ui.le_zeroShift.text(), self.m_ui.le_range.text(), self.m_ui.le_res_2.text(), self.m_ui.le_res_3.text(), self.m_ui.le_res_4.text(), self.m_ui.le_res_5.text(), self.m_ui.le_res_6.text()]
+
+        data_rows = numpy.transpose(numpy.vstack([numpy.round(self.plot.buffer_x).astype(int), self.plot.buffer_y]))
+
+
+        plot_names = ["Time", self.m_ui.lineEdit_2.text(), self.m_ui.lineEdit.text(), self.m_ui.lineEdit_3.text(), self.m_ui.lineEdit_4.text(), self.m_ui.lineEdit_5.text()]
+
+        with open(file_name, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(row)
+            writer.writerows(numpy.transpose([names, values]))
+            writer.writerow("")
+            writer.writerow(plot_names)
+            writer.writerows(data_rows)
+
+    @Slot()
+    def takeScreenShot(self):
+        file_name = datetime.datetime.now().strftime("%Y-%m-%d %H_%M_%S")
+        file_name =  file_name + '.png'
+        file_name = str(self.downloadPath.directory().path()) + '/' + file_name
+
+        screenshot = self.m_ui.centralwidget.grab()
+        screenshot.save(file_name, "png")

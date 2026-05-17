@@ -1593,6 +1593,7 @@
      <string>Tools</string>
     </property>
     <addaction name="actionConfigure"/>
+    <addaction name="actionDownload_path"/>
    </widget>
    <addaction name="menuCalls"/>
    <addaction name="menuTools"/>
@@ -1613,13 +1614,15 @@
    <addaction name="actionClear"/>
    <addaction name="actionPause"/>
    <addaction name="actionStop"/>
+   <addaction name="actionExport_data"/>
+   <addaction name="actionfastScreenShot"/>
   </widget>
   <action name="actionConnect">
    <property name="icon">
     <iconset theme="QIcon::ThemeIcon::MediaPlaylistShuffle"/>
    </property>
    <property name="text">
-    <string>Conncect</string>
+    <string>Connect</string>
    </property>
   </action>
   <action name="actionDisconnect">
@@ -1694,10 +1697,51 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="actionExport_data">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+   </property>
+   <property name="text">
+    <string>Export data </string>
+   </property>
+   <property name="toolTip">
+    <string>Export data in csv</string>
+   </property>
+   <property name="shortcut">
+    <string>E</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionDownload_path">
+   <property name="text">
+    <string>Download path</string>
+   </property>
+  </action>
+  <action name="actionfastScreenShot">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::CameraPhoto"/>
+   </property>
+   <property name="text">
+    <string>fastScreenShot</string>
+   </property>
+   <property name="toolTip">
+    <string>Take imidiate screenshot of entire app</string>
+   </property>
+   <property name="shortcut">
+    <string>S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="bg_read"/>
+  <buttongroup name="bg_save"/>
   <buttongroup name="bg_readM"/>
   <buttongroup name="bg_clrPlots">
    <property name="exclusive">
@@ -1705,8 +1749,6 @@
    </property>
   </buttongroup>
   <buttongroup name="bg_update"/>
-  <buttongroup name="bg_read"/>
-  <buttongroup name="bg_save"/>
   <buttongroup name="bg_send"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">

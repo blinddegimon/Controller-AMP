@@ -31,13 +31,14 @@
     "le_res_5": "0",
     "le_res_6": "1",
     "radioButton": true,
-    "lineEdit": "",
+    "lineEdit": "2",
     "radioButton_2": true,
-    "lineEdit_2": "",
+    "lineEdit_2": "1",
     "radioButton_3": true,
-    "lineEdit_3": "",
+    "lineEdit_3": "3",
     "radioButton_4": true,
-    "lineEdit_4": "",
+    "lineEdit_4": "4",
     "radioButton_5": true,
-    "lineEdit_5": ""
+    "lineEdit_5": "5",
+    "fd_downloadPath": "C:/Users/Artem/Downloads"
 }
