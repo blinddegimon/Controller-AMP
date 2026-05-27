@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowgJqSeL.ui'
+## Form generated from reading UI file 'mainwindowINnwSS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -17,10 +17,11 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QComboBox,
-    QFrame, QGridLayout, QHBoxLayout, QLabel,
-    QLineEdit, QMainWindow, QMenu, QMenuBar,
-    QPushButton, QRadioButton, QSizePolicy, QSpinBox,
-    QStatusBar, QToolBar, QVBoxLayout, QWidget)
+    QDoubleSpinBox, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QLineEdit, QMainWindow, QMenu,
+    QMenuBar, QPushButton, QRadioButton, QSizePolicy,
+    QSpinBox, QStatusBar, QToolBar, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -711,13 +712,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.pb_gen, 1, 0, 1, 1)
 
-        self.sb_genFreq = QSpinBox(self.frame_3)
-        self.sb_genFreq.setObjectName(u"sb_genFreq")
-        self.sb_genFreq.setWrapping(False)
-        self.sb_genFreq.setMinimum(1)
-
-        self.gridLayout.addWidget(self.sb_genFreq, 1, 1, 1, 1)
-
         self.cb_degrees = QCheckBox(self.frame_3)
         self.cb_degrees.setObjectName(u"cb_degrees")
 
@@ -765,6 +759,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_3, 5, 0, 1, 1)
 
         self.cb_appMode = QComboBox(self.frame_3)
+        self.cb_appMode.addItem("")
         self.cb_appMode.addItem("")
         self.cb_appMode.addItem("")
         self.cb_appMode.setObjectName(u"cb_appMode")
@@ -828,6 +823,15 @@ class Ui_MainWindow(object):
         self.pb_arr.setAutoExclusive(False)
 
         self.gridLayout.addWidget(self.pb_arr, 6, 2, 1, 1)
+
+        self.sb_genFreq = QDoubleSpinBox(self.frame_3)
+        self.sb_genFreq.setObjectName(u"sb_genFreq")
+        self.sb_genFreq.setDecimals(1)
+        self.sb_genFreq.setMaximum(10.000000000000000)
+        self.sb_genFreq.setSingleStep(0.100000000000000)
+        self.sb_genFreq.setValue(0.100000000000000)
+
+        self.gridLayout.addWidget(self.sb_genFreq, 1, 1, 1, 1)
 
         self.gridLayout.setColumnMinimumWidth(3, 80)
 
@@ -1096,7 +1100,6 @@ class Ui_MainWindow(object):
         self.pb_send.setText(QCoreApplication.translate("MainWindow", u"SEND", None))
         self.l_pps.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.pb_gen.setText(QCoreApplication.translate("MainWindow", u"GEN", None))
-        self.sb_genFreq.setSuffix(QCoreApplication.translate("MainWindow", u" Hz", None))
         self.cb_degrees.setText("")
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Angle:", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Degrees:", None))
@@ -1107,6 +1110,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Set Pos:", None))
         self.cb_appMode.setItemText(0, QCoreApplication.translate("MainWindow", u"APP_OPEN", None))
         self.cb_appMode.setItemText(1, QCoreApplication.translate("MainWindow", u"APP_CLOSE", None))
+        self.cb_appMode.setItemText(2, QCoreApplication.translate("MainWindow", u"APP_ARR", None))
 
         self.pb_setPos2.setText(QCoreApplication.translate("MainWindow", u"SetPos 2", None))
         self.pb_setPos3.setText(QCoreApplication.translate("MainWindow", u"SetPos 3", None))
@@ -1116,6 +1120,8 @@ class Ui_MainWindow(object):
         self.cb_arr.setItemText(2, QCoreApplication.translate("MainWindow", u"RARR", None))
 
         self.pb_arr.setText("")
+        self.sb_genFreq.setPrefix("")
+        self.sb_genFreq.setSuffix(QCoreApplication.translate("MainWindow", u" Hz", None))
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Plot 2", None))
         self.lineEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Plot 1", None))
         self.radioButton_5.setText("")

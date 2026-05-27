@@ -1162,19 +1162,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QSpinBox" name="sb_genFreq">
-           <property name="wrapping">
-            <bool>false</bool>
-           </property>
-           <property name="suffix">
-            <string> Hz</string>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="3">
           <widget class="QCheckBox" name="cb_degrees">
            <property name="text">
@@ -1269,6 +1256,11 @@
            <item>
             <property name="text">
              <string>APP_CLOSE</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>APP_ARR</string>
             </property>
            </item>
           </widget>
@@ -1377,6 +1369,28 @@
            </property>
            <property name="autoExclusive">
             <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="sb_genFreq">
+           <property name="prefix">
+            <string/>
+           </property>
+           <property name="suffix">
+            <string> Hz</string>
+           </property>
+           <property name="decimals">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.100000000000000</double>
            </property>
           </widget>
          </item>
@@ -1741,19 +1755,19 @@
  <connections/>
  <buttongroups>
   <buttongroup name="bg_read"/>
-  <buttongroup name="bg_save"/>
-  <buttongroup name="bg_readM"/>
   <buttongroup name="bg_clrPlots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="bg_update"/>
   <buttongroup name="bg_send"/>
+  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_update"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="bg_readM"/>
  </buttongroups>
 </ui>

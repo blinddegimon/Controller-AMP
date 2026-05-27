@@ -1,5 +1,5 @@
 from PySide6.QtCore import QIODeviceBase, Slot, QByteArray, QTimer, QThread, QObject, Signal, QLocale
-from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton, QSpinBox, QFileDialog
+from PySide6.QtWidgets import QLabel, QMainWindow, QMessageBox, QGraphicsView, QLineEdit, QWidget, QCheckBox, QComboBox, QRadioButton, QDoubleSpinBox, QSpinBox, QFileDialog
 from PySide6.QtSerialPort import QSerialPort
 from PySide6.QtGui import QShortcut, QIntValidator, QDoubleValidator
 
@@ -106,12 +106,13 @@ class AppConfig:
             case QComboBox():
                 value = widget.currentIndex()
                 #print("QComboBox")
-            case QSpinBox():
+            case QDoubleSpinBox() | QSpinBox():
                 value = widget.value()
             case QFileDialog():
                 value = str(widget.directory().path())
             case _:
                 print("something went wrong")
+                print(widget)
 
         return key, value
 
@@ -128,7 +129,7 @@ class AppConfig:
             case QComboBox():
                 widget.setCurrentIndex(value)
                 #print("QComboBox")
-            case QSpinBox():
+            case QDoubleSpinBox() | QSpinBox():
                 widget.setValue(value)
             case QFileDialog():
                 widget.setDirectory(value)
@@ -353,7 +354,6 @@ class MainWindow(QMainWindow):
     @Slot()
     def timer_gen_start(self, btn):
         self.gen_start_pos = self.pos
-        print(btn)
 
         if btn:
             self.timer_gen.start(1000/self.m_ui.sb_genFreq.value())
@@ -362,7 +362,7 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def update_gen(self):
-
+        print("gen")
         sign = 1 if self.gen_sign else -1
         self.gen_sign = True if not self.gen_sign else False
 
