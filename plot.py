@@ -6,7 +6,7 @@ import pyqtgraph as pg
 import numpy as np
 import array
 
-BUFFER_SIZE = 2000
+BUFFER_SIZE = 11000
 
 
 

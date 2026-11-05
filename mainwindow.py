@@ -477,6 +477,7 @@ class MainWindow(QMainWindow):
             buffer = QByteArray(to_b16t(self.send_buffer))
 
         else:
+            self.uart_buffer = [0 for _ in range(9)]
             self.uart_buffer[0] = headers[self.m_ui.cb_ampSelect.currentIndex()-1]
             self.uart_buffer[1] = header
 
@@ -492,21 +493,30 @@ class MainWindow(QMainWindow):
 
         header = 0x6788
 
-
-        sbuffer[0] = self.m_ui.cb_enable.isChecked()
-        sbuffer[1] = self.m_ui.cb_appMode.currentIndex()
-        sbuffer[2] = int(self.le_list[btn_id].text())
-        sbuffer[3] = self.m_ui.cb_arr.currentIndex()
+        if btn_id != 5:
+            sbuffer[0] = self.m_ui.cb_enable.isChecked()
+            sbuffer[1] = self.m_ui.cb_appMode.currentIndex()
+            sbuffer[2] = int(self.le_list[btn_id].text())
+            sbuffer[3] = self.m_ui.cb_arr.currentIndex()
 
         self.start_buffer_to_send(header)
 
         match self.m_ui.cb_ampSelect.currentIndex():
             case 0:
                 self.send_buffer[1:7] = sbuffer
+
                 buffer = QByteArray(to_b16t(self.send_buffer))
             case 1 | 2 | 3 | 4 :
                 self.uart_buffer[2:] = sbuffer
                 buffer = QByteArray(to_b16t(self.uart_buffer))
+
+            case 5:
+                self.send_buffer[1] = 0
+                self.send_buffer[2] = 1
+                self.send_buffer[3] = 0
+                self.send_buffer[4] = 0
+
+                buffer = QByteArray(to_b16t(self.send_buffer))
 
         # print(btn_id)
         # self.send_buffer[0] = 0x6788
@@ -528,7 +538,7 @@ class MainWindow(QMainWindow):
     @Slot()
     def send_disable(self):
         self.m_ui.cb_enable.setChecked(False)
-        self.send_data(0)
+        self.send_data(5)
 
         # buffer = QByteArray(to_b16t(self.send_buffer))
         # self.m_serial.write(buffer)
@@ -608,7 +618,7 @@ class MainWindow(QMainWindow):
                 sbuffer[1] = int(float(self.m_ui.le_Q.text()) * 10)
                 sbuffer[2] = int(float(self.m_ui.le_D.text()) * 10)
                 sbuffer[3] = int(self.m_ui.le_elZeroShift.text())
-                sbuffer[4] = int(float(self.m_ui.le_phStep.text()) * 10)
+                sbuffer[4] = int(float(self.m_ui.le_phStep.text()) * 1000)
                 sbuffer[5] = int(float(self.m_ui.le_phAcc.text()) * 10)
                 sbuffer[6] = self.m_ui.cb_mtMode.currentIndex()
 
@@ -616,9 +626,9 @@ class MainWindow(QMainWindow):
                 header = 0x8780
                 sbuffer[0] = int(float(self.m_ui.le_posP.text()) * 10)
                 sbuffer[1] = int(float(self.m_ui.le_posD.text()) * 10)
-                sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 10)
+                sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 1)
                 sbuffer[3] = int(float(self.m_ui.le_spP.text()) * 1000)
-                sbuffer[4] = int(float(self.m_ui.le_spI.text()) * 1000)
+                sbuffer[4] = int(float(self.m_ui.le_spI.text()) * 10000)
                 sbuffer[5] = int(float(self.m_ui.le_spSat.text()) * 10)
                 sbuffer[6] = int(self.m_ui.le_res.text())
 
@@ -674,9 +684,9 @@ class MainWindow(QMainWindow):
             case 0x8280 | 0x7780:
                 self.m_ui.lr_posP.setText(str(data[1]/10))
                 self.m_ui.lr_posD.setText(str(data[2] / 10))
-                self.m_ui.lr_posSat.setText(str(data[3] / 10))
+                self.m_ui.lr_posSat.setText(str(data[3] / 1))
                 self.m_ui.lr_spP.setText(str(data[4] / 1000))
-                self.m_ui.lr_spI.setText(str(data[5] / 1000))
+                self.m_ui.lr_spI.setText(str(data[5] / 10000))
                 self.m_ui.lr_spSat.setText(str(data[6] / 10))
                 self.m_ui.lr_res.setText(str(data[7]))
 
