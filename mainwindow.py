@@ -453,6 +453,9 @@ class MainWindow(QMainWindow):
             case 0x6788:
 
                 buffer_temp_pl = buffer_temp[1:6]
+                buffer_temp_pl[3] = buffer_temp_pl[3] / 10
+                buffer_temp_pl[3] = buffer_temp_pl[4] / 10
+                buffer_temp_pl[3] = buffer_temp_pl[5] / 10
                 self.plot.update_buffer_y(buffer_temp_pl)
 
                 self.prev_pos = self.pos
@@ -470,9 +473,10 @@ class MainWindow(QMainWindow):
 
                 print(buffer_temp[6])
 
-                self.m_ui.l_PAVcc.setText(str(buffer_temp[6]))
-                self.m_ui.l_NAVcc.setText(str(buffer_temp[7]))
-                self.m_ui.l_5Vcc.setText(str(buffer_temp[8]))
+
+                self.m_ui.l_PAVcc.setText(str(f'{buffer_temp[6]/10: .1f}'))
+                self.m_ui.l_NAVcc.setText(str(f'{buffer_temp[7]/10: .1f}'))
+                self.m_ui.l_5Vcc.setText(str(f'{buffer_temp[8]/10: .1f}'))
 
     def start_buffer_to_send(self, header):
         headers = [0x8849, 0x8850, 0x8949, 0x8950]
