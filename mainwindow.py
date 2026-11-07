@@ -393,7 +393,7 @@ class MainWindow(QMainWindow):
         self.m_serial.setParity(s.parity)
         self.m_serial.setStopBits(s.stop_bits)
         self.m_serial.setFlowControl(s.flow_control)
-        self.m_serial.setReadBufferSize(16)
+        self.m_serial.setReadBufferSize(18)
         if self.m_serial.open(QIODeviceBase.OpenModeFlag.ReadWrite):
             #self.m_console.setEnabled(True)
             #self.m_console.set_local_echo_enabled(s.local_echo_enabled)
@@ -467,6 +467,12 @@ class MainWindow(QMainWindow):
 
                 self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[6] else "OPEN")
                 self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(251, 65, 65)" if buffer_temp[6] else "rgb(92, 179, 56)"))
+
+                print(buffer_temp[6])
+
+                self.m_ui.l_PAVcc.setText(str(buffer_temp[6]))
+                self.m_ui.l_NAVcc.setText(str(buffer_temp[7]))
+                self.m_ui.l_5Vcc.setText(str(buffer_temp[8]))
 
     def start_buffer_to_send(self, header):
         headers = [0x8849, 0x8850, 0x8949, 0x8950]

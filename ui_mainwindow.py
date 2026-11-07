@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowINnwSS.ui'
+## Form generated from reading UI file 'mainwindowdaiBWL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1744, 812)
+        MainWindow.resize(1801, 812)
         MainWindow.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
         self.actionConnect = QAction(MainWindow)
         self.actionConnect.setObjectName(u"actionConnect")
@@ -661,6 +661,56 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addLayout(self.gridLayout_7)
 
+        self.gridLayout_4 = QGridLayout()
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.l_NAVcc = QLabel(self.frame)
+        self.l_NAVcc.setObjectName(u"l_NAVcc")
+        self.l_NAVcc.setMinimumSize(QSize(50, 0))
+        font3 = QFont()
+        font3.setPointSize(13)
+        self.l_NAVcc.setFont(font3)
+
+        self.gridLayout_4.addWidget(self.l_NAVcc, 1, 1, 1, 1)
+
+        self.label_20 = QLabel(self.frame)
+        self.label_20.setObjectName(u"label_20")
+        font4 = QFont()
+        font4.setPointSize(13)
+        font4.setBold(True)
+        self.label_20.setFont(font4)
+
+        self.gridLayout_4.addWidget(self.label_20, 1, 0, 1, 1)
+
+        self.l_PAVcc = QLabel(self.frame)
+        self.l_PAVcc.setObjectName(u"l_PAVcc")
+        self.l_PAVcc.setMinimumSize(QSize(50, 0))
+        self.l_PAVcc.setFont(font3)
+        self.l_PAVcc.setTextFormat(Qt.TextFormat.PlainText)
+
+        self.gridLayout_4.addWidget(self.l_PAVcc, 0, 1, 1, 1)
+
+        self.label_18 = QLabel(self.frame)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setFont(font4)
+
+        self.gridLayout_4.addWidget(self.label_18, 0, 0, 1, 1)
+
+        self.label_22 = QLabel(self.frame)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setFont(font4)
+
+        self.gridLayout_4.addWidget(self.label_22, 2, 0, 1, 1)
+
+        self.l_5Vcc = QLabel(self.frame)
+        self.l_5Vcc.setObjectName(u"l_5Vcc")
+        self.l_5Vcc.setMinimumSize(QSize(50, 0))
+        self.l_5Vcc.setFont(font3)
+
+        self.gridLayout_4.addWidget(self.l_5Vcc, 2, 1, 1, 1)
+
+
+        self.horizontalLayout_2.addLayout(self.gridLayout_4)
+
 
         self.gridLayout_3.addWidget(self.frame, 1, 3, 1, 1)
 
@@ -969,7 +1019,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1744, 33))
+        self.menubar.setGeometry(QRect(0, 0, 1801, 33))
         self.menuCalls = QMenu(self.menubar)
         self.menuCalls.setObjectName(u"menuCalls")
         self.menuTools = QMenu(self.menubar)
@@ -1095,6 +1145,12 @@ class Ui_MainWindow(object):
         self.label_46.setText(QCoreApplication.translate("MainWindow", u"AMP ID", None))
         self.pb_genUpdateConf.setText(QCoreApplication.translate("MainWindow", u"UPDATE", None))
         self.pb_genReadConf.setText(QCoreApplication.translate("MainWindow", u"READ", None))
+        self.l_NAVcc.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"-27 V", None))
+        self.l_PAVcc.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"+27 V", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"5V", None))
+        self.l_5Vcc.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.sb_genAmpl.setSuffix(QCoreApplication.translate("MainWindow", u" \u00b0", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"CONTROL", None))
         self.pb_send.setText(QCoreApplication.translate("MainWindow", u"SEND", None))

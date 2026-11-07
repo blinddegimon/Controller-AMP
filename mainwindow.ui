@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1744</width>
+    <width>1801</width>
     <height>812</height>
    </rect>
   </property>
@@ -1079,6 +1079,106 @@
          </item>
         </layout>
        </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="1" column="1">
+          <widget class="QLabel" name="l_NAVcc">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_20">
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>-27 V</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="l_PAVcc">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::TextFormat::PlainText</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_18">
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>+27 V</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_22">
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>5V</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="l_5Vcc">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
     </item>
@@ -1591,7 +1691,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1744</width>
+     <width>1801</width>
      <height>33</height>
     </rect>
    </property>
@@ -1754,13 +1854,6 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="bg_read"/>
-  <buttongroup name="bg_clrPlots">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="bg_send"/>
   <buttongroup name="bg_save"/>
   <buttongroup name="bg_update"/>
   <buttongroup name="bg_plots">
@@ -1768,6 +1861,13 @@
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="bg_clrPlots">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="bg_send"/>
   <buttongroup name="bg_readM"/>
+  <buttongroup name="bg_read"/>
  </buttongroups>
 </ui>
