@@ -451,11 +451,11 @@ class MainWindow(QMainWindow):
             case 0x8277 | 0x8280 | 0x8288 | 0x7777 | 0x7780 | 0x7788:
                 self.update_config(buffer_temp)
             case 0x6788:
-
+                buffer_temp[3] = buffer_temp[3] / 10
+                buffer_temp[4] = buffer_temp[4] / 10
+                buffer_temp[5] = buffer_temp[5] / 10
                 buffer_temp_pl = buffer_temp[1:6]
-                buffer_temp_pl[3] = buffer_temp_pl[3] / 10
-                buffer_temp_pl[3] = buffer_temp_pl[4] / 10
-                buffer_temp_pl[3] = buffer_temp_pl[5] / 10
+
                 self.plot.update_buffer_y(buffer_temp_pl)
 
                 self.prev_pos = self.pos
@@ -471,7 +471,7 @@ class MainWindow(QMainWindow):
                 self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[9] else "OPEN")
                 self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(251, 65, 65)" if buffer_temp[9] else "rgb(92, 179, 56)"))
 
-                print(buffer_temp[6])
+                #print(buffer_temp[6])
 
 
                 self.m_ui.l_PAVcc.setText(str(f'{buffer_temp[6]/10: .1f}'))
