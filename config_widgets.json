@@ -40,5 +40,10 @@
     "lineEdit_4": "V",
     "radioButton_5": false,
     "lineEdit_5": "W",
-    "fd_downloadPath": "C:/Projects/Lab/Volochisk3/EMA  params"
+    "cb_Plot1": 0,
+    "cb_Plot2": 0,
+    "cb_Plot3": 0,
+    "cb_Plot4": 0,
+    "cb_Plot5": 0,
+    "fd_downloadPath": "E:/Projects/PySide/Controller-AMP"
 }

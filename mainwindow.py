@@ -128,7 +128,7 @@ class AppConfig:
                 #print("QCheckBox")
             case QComboBox():
                 widget.setCurrentIndex(value)
-                #print("QComboBox")
+                print("QComboBox")
             case QDoubleSpinBox() | QSpinBox():
                 widget.setValue(value)
             case QFileDialog():
@@ -252,19 +252,19 @@ class MainWindow(QMainWindow):
 
 
         self.config_settings.add_widget(self.m_ui.radioButton)
-        self.config_settings.add_widget(self.m_ui.lineEdit)
+        self.config_settings.add_widget(self.m_ui.cb_Plot1)
 
         self.config_settings.add_widget(self.m_ui.radioButton_2)
-        self.config_settings.add_widget(self.m_ui.lineEdit_2)
+        self.config_settings.add_widget(self.m_ui.cb_Plot2)
 
         self.config_settings.add_widget(self.m_ui.radioButton_3)
-        self.config_settings.add_widget(self.m_ui.lineEdit_3)
+        self.config_settings.add_widget(self.m_ui.cb_Plot3)
 
         self.config_settings.add_widget(self.m_ui.radioButton_4)
-        self.config_settings.add_widget(self.m_ui.lineEdit_4)
+        self.config_settings.add_widget(self.m_ui.cb_Plot4)
 
         self.config_settings.add_widget(self.m_ui.radioButton_5)
-        self.config_settings.add_widget(self.m_ui.lineEdit_5)
+        self.config_settings.add_widget(self.m_ui.cb_Plot5)
 
         self.config_settings.add_widget(self.downloadPath)
 
@@ -296,7 +296,7 @@ class MainWindow(QMainWindow):
         self.le_list = (self.m_ui.le_setPos, self.m_ui.le_setPos1, self.m_ui.le_setPos2, self.m_ui.le_setPos3)
 
         self.send_buffer = [0 for _ in range(64)]
-        self.uart_buffer = [0 for _ in range(9)]
+        self.uart_buffer = [0 for _ in range(10)]
 
         self.plot = plt.Plot(self.m_ui.bg_plots)
         #self.plot.setMenuEnabled(False)
@@ -393,7 +393,7 @@ class MainWindow(QMainWindow):
         self.m_serial.setParity(s.parity)
         self.m_serial.setStopBits(s.stop_bits)
         self.m_serial.setFlowControl(s.flow_control)
-        self.m_serial.setReadBufferSize(40)
+        self.m_serial.setReadBufferSize(64)
         if self.m_serial.open(QIODeviceBase.OpenModeFlag.ReadWrite):
             #self.m_console.setEnabled(True)
             #self.m_console.set_local_echo_enabled(s.local_echo_enabled)
@@ -451,10 +451,17 @@ class MainWindow(QMainWindow):
             case 0x8277 | 0x8280 | 0x8288 | 0x7777 | 0x7780 | 0x7788:
                 self.update_config(buffer_temp)
             case 0x6788:
-                buffer_temp[3] = buffer_temp[3] / 10
-                buffer_temp[4] = buffer_temp[4] / 10
-                buffer_temp[5] = buffer_temp[5] / 10
-                buffer_temp_pl = buffer_temp[1:6]
+                buffer_temp_pl = [0,0,0,0,0]
+                # buffer_temp[3] = buffer_temp[3] / 10
+                # buffer_temp[4] = buffer_temp[4] / 10
+                # buffer_temp[5] = buffer_temp[5] / 10
+                # buffer_temp_pl = buffer_temp[1:6]
+                buffer_temp_pl[0] = buffer_temp[int(self.m_ui.cb_Plot1.currentIndex())]
+                buffer_temp_pl[1] = buffer_temp[int(self.m_ui.cb_Plot2.currentIndex())]
+                buffer_temp_pl[2] = buffer_temp[int(self.m_ui.cb_Plot3.currentIndex())]
+                buffer_temp_pl[3] = buffer_temp[int(self.m_ui.cb_Plot4.currentIndex())]
+                buffer_temp_pl[4] = buffer_temp[int(self.m_ui.cb_Plot5.currentIndex())]
+
 
                 self.plot.update_buffer_y(buffer_temp_pl)
 
@@ -487,7 +494,7 @@ class MainWindow(QMainWindow):
             buffer = QByteArray(to_b16t(self.send_buffer))
 
         else:
-            self.uart_buffer = [0 for _ in range(9)]
+            self.uart_buffer = [0 for _ in range(10)]
             self.uart_buffer[0] = headers[self.m_ui.cb_ampSelect.currentIndex()-1]
             self.uart_buffer[1] = header
 

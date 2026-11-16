@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1801</width>
+    <width>1856</width>
     <height>812</height>
    </rect>
   </property>
@@ -1515,21 +1515,7 @@
         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1500">
          <item>
           <layout class="QGridLayout" name="gridLayout_5">
-           <item row="4" column="0" colspan="2">
-            <widget class="QLineEdit" name="lineEdit">
-             <property name="placeholderText">
-              <string>Plot 2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QLineEdit" name="lineEdit_2">
-             <property name="placeholderText">
-              <string>Plot 1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="0">
+           <item row="10" column="0">
             <widget class="QRadioButton" name="radioButton_5">
              <property name="text">
               <string/>
@@ -1545,54 +1531,7 @@
              </attribute>
             </widget>
            </item>
-           <item row="8" column="0" colspan="2">
-            <widget class="QLineEdit" name="lineEdit_4">
-             <property name="placeholderText">
-              <string>Plot 4</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="2">
-            <widget class="QLineEdit" name="lineEdit_3">
-             <property name="placeholderText">
-              <string>Plot 3</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QRadioButton" name="radioButton_2">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_plots</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="10" column="0" colspan="2">
-            <widget class="QLineEdit" name="lineEdit_5">
-             <property name="placeholderText">
-              <string>Plot 5</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QRadioButton" name="radioButton_3">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_plots</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="2" column="0">
+           <item row="1" column="0">
             <widget class="QRadioButton" name="radioButton">
              <property name="text">
               <string/>
@@ -1608,7 +1547,244 @@
              </attribute>
             </widget>
            </item>
-           <item row="9" column="0">
+           <item row="6" column="0">
+            <widget class="QRadioButton" name="radioButton_3">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_plots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_5">
+             <property name="autoFillBackground">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="2">
+            <widget class="QComboBox" name="cb_Plot5">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>elec_angle</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentU</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentV</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentW</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>NAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>V5c</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>phase_ac</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed_filt</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>set_pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zadatchik.pos_out</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QRadioButton" name="radioButton_2">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_plots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_1">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QComboBox" name="cb_Plot1">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>elec_angle</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentU</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentV</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentW</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>NAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>V5c</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>phase_ac</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed_filt</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>set_pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zadatchik.pos_out</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="8" column="0">
             <widget class="QRadioButton" name="radioButton_4">
              <property name="text">
               <string/>
@@ -1621,40 +1797,195 @@
              </attribute>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_1">
-             <property name="autoFillBackground">
-              <bool>true</bool>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
+           <item row="5" column="0" colspan="2">
+            <widget class="QComboBox" name="cb_Plot3">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>elec_angle</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentU</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentV</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentW</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>NAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>V5c</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>phase_ac</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed_filt</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>set_pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zadatchik.pos_out</string>
+              </property>
+             </item>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_2">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
+           <item row="7" column="0" colspan="2">
+            <widget class="QComboBox" name="cb_Plot4">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>elec_angle</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentU</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentV</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentW</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>NAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>V5c</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>phase_ac</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed_filt</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>set_pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zadatchik.pos_out</string>
+              </property>
+             </item>
             </widget>
            </item>
-           <item row="7" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_3">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="9" column="1">
+           <item row="8" column="1">
             <widget class="QPushButton" name="pb_clrPlot_4">
              <property name="text">
               <string/>
@@ -1664,8 +1995,112 @@
              </attribute>
             </widget>
            </item>
-           <item row="11" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_5">
+           <item row="3" column="0" colspan="2">
+            <widget class="QComboBox" name="cb_Plot2">
+             <item>
+              <property name="text">
+               <string>None</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>elec_angle</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentU</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentV</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CurrentW</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>NAVcc</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>V5c</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D_ref</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>D</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>phase_ac</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>angle_speed_filt</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>set_pos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zadatchik.pos_out</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_3">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_2">
              <property name="text">
               <string/>
              </property>
@@ -1691,7 +2126,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1801</width>
+     <width>1856</width>
      <height>33</height>
     </rect>
    </property>
@@ -1854,20 +2289,16 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_send"/>
   <buttongroup name="bg_update"/>
+  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_read"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="bg_clrPlots">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
-  <buttongroup name="bg_send"/>
   <buttongroup name="bg_readM"/>
-  <buttongroup name="bg_read"/>
+  <buttongroup name="bg_clrPlots"/>
  </buttongroups>
 </ui>
