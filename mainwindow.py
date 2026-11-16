@@ -128,7 +128,7 @@ class AppConfig:
                 #print("QCheckBox")
             case QComboBox():
                 widget.setCurrentIndex(value)
-                print("QComboBox")
+                # print("QComboBox")
             case QDoubleSpinBox() | QSpinBox():
                 widget.setValue(value)
             case QFileDialog():
@@ -466,7 +466,7 @@ class MainWindow(QMainWindow):
                 self.plot.update_buffer_y(buffer_temp_pl)
 
                 self.prev_pos = self.pos
-                self.pos = buffer_temp[2]
+                self.pos = buffer_temp[1]
 
                 angle = buffer_temp[2]
                 if self.m_ui.cb_degrees.isChecked():
