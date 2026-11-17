@@ -5,7 +5,7 @@ __pycache__/
 
 # Project specific, .json config files
 
-*_config_widgets.json
+config_widgets.json
 
 # C extensions
 *.so
