@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowffOatl.ui'
+## Form generated from reading UI file 'mainwindowPGZQMn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -812,6 +812,7 @@ class Ui_MainWindow(object):
         self.cb_appMode.addItem("")
         self.cb_appMode.addItem("")
         self.cb_appMode.addItem("")
+        self.cb_appMode.addItem("")
         self.cb_appMode.setObjectName(u"cb_appMode")
 
         self.gridLayout.addWidget(self.cb_appMode, 4, 1, 1, 1)
@@ -1255,6 +1256,7 @@ class Ui_MainWindow(object):
         self.cb_appMode.setItemText(0, QCoreApplication.translate("MainWindow", u"APP_OPEN", None))
         self.cb_appMode.setItemText(1, QCoreApplication.translate("MainWindow", u"APP_CLOSE", None))
         self.cb_appMode.setItemText(2, QCoreApplication.translate("MainWindow", u"APP_ARR", None))
+        self.cb_appMode.setItemText(3, QCoreApplication.translate("MainWindow", u"APP_SPEED", None))
 
         self.pb_setPos2.setText(QCoreApplication.translate("MainWindow", u"SetPos 2", None))
         self.pb_setPos3.setText(QCoreApplication.translate("MainWindow", u"SetPos 3", None))

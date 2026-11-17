@@ -1363,6 +1363,11 @@
              <string>APP_ARR</string>
             </property>
            </item>
+           <item>
+            <property name="text">
+             <string>APP_SPEED</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item row="5" column="1">
@@ -2286,16 +2291,16 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="bg_send"/>
-  <buttongroup name="bg_update"/>
-  <buttongroup name="bg_save"/>
   <buttongroup name="bg_read"/>
+  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_update"/>
+  <buttongroup name="bg_readM"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="bg_readM"/>
   <buttongroup name="bg_clrPlots"/>
+  <buttongroup name="bg_send"/>
  </buttongroups>
 </ui>
