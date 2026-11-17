@@ -289,7 +289,7 @@ class MainWindow(QMainWindow):
         self.m_ui.bg_plots.setId(self.m_ui.radioButton_5, 4)
 
         self.timer.start(1000)
-        self.timer_plot.start(33)
+        self.timer_plot.start(100)
         self.pps = 0
         self.prev_pps = 0
 
@@ -311,6 +311,8 @@ class MainWindow(QMainWindow):
         self.m_ui.actionConnect.triggered.connect(self.open_serial_port)
         self.m_ui.actionDisconnect.triggered.connect(self.close_serial_port)
         self.m_ui.bg_send.idClicked.connect(self.send_data)
+
+        self.m_ui.actionPause.triggered.connect(self.timer_plot_start_stop)
 
         self.m_ui.bg_read.buttonClicked.connect(self.send_read_config)
         self.m_ui.bg_readM.buttonClicked.connect(self.send_read_mem)
@@ -350,6 +352,14 @@ class MainWindow(QMainWindow):
     @Slot()
     def test_f(self):
         print("test")
+
+    @Slot()
+    def timer_plot_start_stop(self, btn):
+        print(btn)
+        if not btn:
+            self.timer_plot.start(100)
+        else:
+            self.timer_plot.stop()
 
     @Slot()
     def timer_gen_start(self, btn):
@@ -468,7 +478,7 @@ class MainWindow(QMainWindow):
                 self.prev_pos = self.pos
                 self.pos = buffer_temp[1]
 
-                angle = buffer_temp[2]
+                angle = buffer_temp[1]
                 if self.m_ui.cb_degrees.isChecked():
                     angle /= 91
 
