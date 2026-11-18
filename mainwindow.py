@@ -485,8 +485,8 @@ class MainWindow(QMainWindow):
 
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
 
-                self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[9] else "OPEN")
-                self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(251, 65, 65)" if buffer_temp[9] else "rgb(92, 179, 56)"))
+                self.m_ui.pb_arr.setText("CLOSE" if buffer_temp[2] else "OPEN")
+                self.m_ui.pb_arr.setStyleSheet("background-color: " + ("rgb(251, 65, 65)" if buffer_temp[2] else "rgb(92, 179, 56)"))
 
                 #print(buffer_temp[6])
 

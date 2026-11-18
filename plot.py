@@ -93,7 +93,7 @@ class Plot(PlotWidget):
         for i in range(0,5):
             self.plot_list[i] = self.bg_plots.button(i).isChecked()
 
-        self.update_pl()
+        #self.update_pl()
 
         if not self.bg_plots.button(btn_id).isChecked() :
             self.curve_list[btn_id].setData(np.zeros(BUFFER_SIZE))
