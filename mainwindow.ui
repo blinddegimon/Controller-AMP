@@ -1697,16 +1697,6 @@
              </item>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_2">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
-            </widget>
-           </item>
            <item row="4" column="0" colspan="2">
             <widget class="QComboBox" name="cb_Plot3">
              <item>
@@ -1900,26 +1890,6 @@
              </attribute>
             </widget>
            </item>
-           <item row="7" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_4">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="9" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_5">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
-            </widget>
-           </item>
            <item row="0" column="0" colspan="2">
             <widget class="QComboBox" name="cb_Plot1">
              <item>
@@ -2082,16 +2052,6 @@
                <string>RESERVE31</string>
               </property>
              </item>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_1">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
             </widget>
            </item>
            <item row="7" column="0">
@@ -2287,16 +2247,6 @@
              </attribute>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="QPushButton" name="pb_clrPlot_3">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">bg_clrPlots</string>
-             </attribute>
-            </widget>
-           </item>
            <item row="8" column="0" colspan="2">
             <widget class="QComboBox" name="cb_Plot5">
              <item>
@@ -2459,6 +2409,56 @@
                <string>RESERVE31</string>
               </property>
              </item>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_1">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_2">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_3">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_4">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <widget class="QPushButton" name="pb_clrPlot_5">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">bg_clrPlots</string>
+             </attribute>
             </widget>
            </item>
           </layout>
@@ -2641,16 +2641,16 @@
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="bg_send"/>
   <buttongroup name="bg_update"/>
-  <buttongroup name="bg_read"/>
+  <buttongroup name="bg_readM"/>
   <buttongroup name="bg_save"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="bg_send"/>
-  <buttongroup name="bg_readM"/>
+  <buttongroup name="bg_read"/>
   <buttongroup name="bg_clrPlots"/>
  </buttongroups>
 </ui>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainwindowHyYirS.ui'
+## Form generated from reading UI file 'mainwindowZqCqUb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.2
 ##
@@ -949,14 +949,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.cb_Plot2, 2, 0, 1, 2)
 
-        self.pb_clrPlot_2 = QPushButton(self.frame_2)
-        self.bg_clrPlots = QButtonGroup(MainWindow)
-        self.bg_clrPlots.setObjectName(u"bg_clrPlots")
-        self.bg_clrPlots.addButton(self.pb_clrPlot_2)
-        self.pb_clrPlot_2.setObjectName(u"pb_clrPlot_2")
-
-        self.gridLayout_5.addWidget(self.pb_clrPlot_2, 3, 1, 1, 1)
-
         self.cb_Plot3 = QComboBox(self.frame_2)
         self.cb_Plot3.addItem("")
         self.cb_Plot3.addItem("")
@@ -1009,18 +1001,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.radioButton_5, 9, 0, 1, 1)
 
-        self.pb_clrPlot_4 = QPushButton(self.frame_2)
-        self.bg_clrPlots.addButton(self.pb_clrPlot_4)
-        self.pb_clrPlot_4.setObjectName(u"pb_clrPlot_4")
-
-        self.gridLayout_5.addWidget(self.pb_clrPlot_4, 7, 1, 1, 1)
-
-        self.pb_clrPlot_5 = QPushButton(self.frame_2)
-        self.bg_clrPlots.addButton(self.pb_clrPlot_5)
-        self.pb_clrPlot_5.setObjectName(u"pb_clrPlot_5")
-
-        self.gridLayout_5.addWidget(self.pb_clrPlot_5, 9, 1, 1, 1)
-
         self.cb_Plot1 = QComboBox(self.frame_2)
         self.cb_Plot1.addItem("")
         self.cb_Plot1.addItem("")
@@ -1057,12 +1037,6 @@ class Ui_MainWindow(object):
         self.cb_Plot1.setObjectName(u"cb_Plot1")
 
         self.gridLayout_5.addWidget(self.cb_Plot1, 0, 0, 1, 2)
-
-        self.pb_clrPlot_1 = QPushButton(self.frame_2)
-        self.bg_clrPlots.addButton(self.pb_clrPlot_1)
-        self.pb_clrPlot_1.setObjectName(u"pb_clrPlot_1")
-
-        self.gridLayout_5.addWidget(self.pb_clrPlot_1, 1, 1, 1, 1)
 
         self.radioButton_4 = QRadioButton(self.frame_2)
         self.bg_plots.addButton(self.radioButton_4)
@@ -1116,12 +1090,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.radioButton, 1, 0, 1, 1)
 
-        self.pb_clrPlot_3 = QPushButton(self.frame_2)
-        self.bg_clrPlots.addButton(self.pb_clrPlot_3)
-        self.pb_clrPlot_3.setObjectName(u"pb_clrPlot_3")
-
-        self.gridLayout_5.addWidget(self.pb_clrPlot_3, 5, 1, 1, 1)
-
         self.cb_Plot5 = QComboBox(self.frame_2)
         self.cb_Plot5.addItem("")
         self.cb_Plot5.addItem("")
@@ -1158,6 +1126,38 @@ class Ui_MainWindow(object):
         self.cb_Plot5.setObjectName(u"cb_Plot5")
 
         self.gridLayout_5.addWidget(self.cb_Plot5, 8, 0, 1, 2)
+
+        self.pb_clrPlot_1 = QPushButton(self.frame_2)
+        self.bg_clrPlots = QButtonGroup(MainWindow)
+        self.bg_clrPlots.setObjectName(u"bg_clrPlots")
+        self.bg_clrPlots.addButton(self.pb_clrPlot_1)
+        self.pb_clrPlot_1.setObjectName(u"pb_clrPlot_1")
+
+        self.gridLayout_5.addWidget(self.pb_clrPlot_1, 1, 1, 1, 1)
+
+        self.pb_clrPlot_2 = QPushButton(self.frame_2)
+        self.bg_clrPlots.addButton(self.pb_clrPlot_2)
+        self.pb_clrPlot_2.setObjectName(u"pb_clrPlot_2")
+
+        self.gridLayout_5.addWidget(self.pb_clrPlot_2, 3, 1, 1, 1)
+
+        self.pb_clrPlot_3 = QPushButton(self.frame_2)
+        self.bg_clrPlots.addButton(self.pb_clrPlot_3)
+        self.pb_clrPlot_3.setObjectName(u"pb_clrPlot_3")
+
+        self.gridLayout_5.addWidget(self.pb_clrPlot_3, 5, 1, 1, 1)
+
+        self.pb_clrPlot_4 = QPushButton(self.frame_2)
+        self.bg_clrPlots.addButton(self.pb_clrPlot_4)
+        self.pb_clrPlot_4.setObjectName(u"pb_clrPlot_4")
+
+        self.gridLayout_5.addWidget(self.pb_clrPlot_4, 7, 1, 1, 1)
+
+        self.pb_clrPlot_5 = QPushButton(self.frame_2)
+        self.bg_clrPlots.addButton(self.pb_clrPlot_5)
+        self.pb_clrPlot_5.setObjectName(u"pb_clrPlot_5")
+
+        self.gridLayout_5.addWidget(self.pb_clrPlot_5, 9, 1, 1, 1)
 
 
         self.horizontalLayout.addLayout(self.gridLayout_5)
@@ -1372,7 +1372,6 @@ class Ui_MainWindow(object):
         self.cb_Plot2.setItemText(30, QCoreApplication.translate("MainWindow", u"RESERVE30", None))
         self.cb_Plot2.setItemText(31, QCoreApplication.translate("MainWindow", u"RESERVE31", None))
 
-        self.pb_clrPlot_2.setText("")
         self.cb_Plot3.setItemText(0, QCoreApplication.translate("MainWindow", u"None", None))
         self.cb_Plot3.setItemText(1, QCoreApplication.translate("MainWindow", u"pos", None))
         self.cb_Plot3.setItemText(2, QCoreApplication.translate("MainWindow", u"hall_ARR", None))
@@ -1408,8 +1407,6 @@ class Ui_MainWindow(object):
 
         self.radioButton_2.setText("")
         self.radioButton_5.setText("")
-        self.pb_clrPlot_4.setText("")
-        self.pb_clrPlot_5.setText("")
         self.cb_Plot1.setItemText(0, QCoreApplication.translate("MainWindow", u"None", None))
         self.cb_Plot1.setItemText(1, QCoreApplication.translate("MainWindow", u"pos", None))
         self.cb_Plot1.setItemText(2, QCoreApplication.translate("MainWindow", u"hall_ARR", None))
@@ -1443,7 +1440,6 @@ class Ui_MainWindow(object):
         self.cb_Plot1.setItemText(30, QCoreApplication.translate("MainWindow", u"RESERVE30", None))
         self.cb_Plot1.setItemText(31, QCoreApplication.translate("MainWindow", u"RESERVE31", None))
 
-        self.pb_clrPlot_1.setText("")
         self.radioButton_4.setText("")
         self.cb_Plot4.setItemText(0, QCoreApplication.translate("MainWindow", u"None", None))
         self.cb_Plot4.setItemText(1, QCoreApplication.translate("MainWindow", u"pos", None))
@@ -1479,7 +1475,6 @@ class Ui_MainWindow(object):
         self.cb_Plot4.setItemText(31, QCoreApplication.translate("MainWindow", u"RESERVE31", None))
 
         self.radioButton.setText("")
-        self.pb_clrPlot_3.setText("")
         self.cb_Plot5.setItemText(0, QCoreApplication.translate("MainWindow", u"None", None))
         self.cb_Plot5.setItemText(1, QCoreApplication.translate("MainWindow", u"pos", None))
         self.cb_Plot5.setItemText(2, QCoreApplication.translate("MainWindow", u"hall_ARR", None))
@@ -1513,6 +1508,11 @@ class Ui_MainWindow(object):
         self.cb_Plot5.setItemText(30, QCoreApplication.translate("MainWindow", u"RESERVE30", None))
         self.cb_Plot5.setItemText(31, QCoreApplication.translate("MainWindow", u"RESERVE31", None))
 
+        self.pb_clrPlot_1.setText("")
+        self.pb_clrPlot_2.setText("")
+        self.pb_clrPlot_3.setText("")
+        self.pb_clrPlot_4.setText("")
+        self.pb_clrPlot_5.setText("")
         self.menuCalls.setTitle(QCoreApplication.translate("MainWindow", u"Calls", None))
         self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"Tools", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))

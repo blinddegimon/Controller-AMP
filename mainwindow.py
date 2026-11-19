@@ -491,9 +491,9 @@ class MainWindow(QMainWindow):
                 #print(buffer_temp[6])
 
 
-                self.m_ui.l_PAVcc.setText(str(f'{buffer_temp[6]/10: .1f}'))
-                self.m_ui.l_NAVcc.setText(str(f'{buffer_temp[7]/10: .1f}'))
-                self.m_ui.l_5Vcc.setText(str(f'{buffer_temp[8]/10: .1f}'))
+                self.m_ui.l_PAVcc.setText(str(f'{buffer_temp[7]/10: .1f}'))
+                self.m_ui.l_NAVcc.setText(str(f'{buffer_temp[8]/10: .1f}'))
+                self.m_ui.l_5Vcc.setText(str(f'{buffer_temp[9]/10: .1f}'))
 
     def start_buffer_to_send(self, header):
         headers = [0x8849, 0x8850, 0x8949, 0x8950]
