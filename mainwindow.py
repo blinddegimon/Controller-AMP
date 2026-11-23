@@ -464,6 +464,8 @@ class MainWindow(QMainWindow):
             case 0x6788:
                 buffer_temp_pl = [0,0,0,0,0]
 
+                new_buffer_temp[:] = buffer_temp
+
                 new_buffer_temp[1] = float(buffer_temp[1] / 91.02222)
                 new_buffer_temp[4] = float(buffer_temp[4] / 10.0)
                 new_buffer_temp[5] = float(buffer_temp[5] / 10.0)
@@ -537,6 +539,7 @@ class MainWindow(QMainWindow):
             sbuffer[0] = self.m_ui.cb_enable.isChecked()
             sbuffer[1] = self.m_ui.cb_appMode.currentIndex()
             sbuffer[2] = int(float(self.le_list[btn_id].text()) * 91.02222)
+            print(sbuffer[2])
             sbuffer[3] = self.m_ui.cb_arr.currentIndex()
 
         self.start_buffer_to_send(header)

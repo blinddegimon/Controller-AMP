@@ -1632,17 +1632,17 @@
              </item>
              <item>
               <property name="text">
-               <string>RESERVE19</string>
+               <string>speed_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE20</string>
+               <string>ac_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE21</string>
+               <string>pid_angle.sum</string>
               </property>
              </item>
              <item>
@@ -1796,17 +1796,17 @@
              </item>
              <item>
               <property name="text">
-               <string>RESERVE19</string>
+               <string>speed_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE20</string>
+               <string>ac_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE21</string>
+               <string>pid_angle.sum</string>
               </property>
              </item>
              <item>
@@ -1989,17 +1989,17 @@
              </item>
              <item>
               <property name="text">
-               <string>RESERVE19</string>
+               <string>speed_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE20</string>
+               <string>ac_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE21</string>
+               <string>pid_angle.sum</string>
               </property>
              </item>
              <item>
@@ -2166,7 +2166,7 @@
              </item>
              <item>
               <property name="text">
-               <string>RESERVE19</string>
+               <string>speed_out</string>
               </property>
              </item>
              <item>
@@ -2176,12 +2176,12 @@
              </item>
              <item>
               <property name="text">
-               <string>RESERVE21</string>
+               <string>ac_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE22</string>
+               <string>pid_angle.sum</string>
               </property>
              </item>
              <item>
@@ -2346,17 +2346,17 @@
              </item>
              <item>
               <property name="text">
-               <string>RESERVE19</string>
+               <string>speed_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE20</string>
+               <string>ac_out</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>RESERVE21</string>
+               <string>pid_angle.sum</string>
               </property>
              </item>
              <item>
@@ -2642,15 +2642,15 @@
  <connections/>
  <buttongroups>
   <buttongroup name="bg_send"/>
-  <buttongroup name="bg_update"/>
-  <buttongroup name="bg_readM"/>
-  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_clrPlots"/>
   <buttongroup name="bg_plots">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="bg_update"/>
   <buttongroup name="bg_read"/>
-  <buttongroup name="bg_clrPlots"/>
+  <buttongroup name="bg_save"/>
+  <buttongroup name="bg_readM"/>
  </buttongroups>
 </ui>
