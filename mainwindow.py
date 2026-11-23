@@ -462,10 +462,19 @@ class MainWindow(QMainWindow):
                 self.update_config(buffer_temp)
             case 0x6788:
                 buffer_temp_pl = [0,0,0,0,0]
-                # buffer_temp[3] = buffer_temp[3] / 10
-                # buffer_temp[4] = buffer_temp[4] / 10
-                # buffer_temp[5] = buffer_temp[5] / 10
-                # buffer_temp_pl = buffer_temp[1:6]
+
+                buffer_temp[1] = float(buffer_temp[1] / 91.02222)
+                buffer_temp[4] = float(buffer_temp[4] / 10.0)
+                buffer_temp[5] = float(buffer_temp[5] / 10.0)
+                buffer_temp[6] = float(buffer_temp[6] / 10.0)
+                buffer_temp[10] = float(buffer_temp[10] / 10.0)
+                buffer_temp[11] = float(buffer_temp[11] / 10.0)
+                buffer_temp[12] = float(buffer_temp[12] / 10.0)
+                buffer_temp[13] = float(buffer_temp[13] / 10.0)
+                buffer_temp[17] = float(buffer_temp[17] / 91.02222)
+                buffer_temp[18] = float(buffer_temp[18] / 91.02222)
+                buffer_temp[20] = float(buffer_temp[20] / 10.0)
+
                 buffer_temp_pl[0] = buffer_temp[int(self.m_ui.cb_Plot1.currentIndex())]
                 buffer_temp_pl[1] = buffer_temp[int(self.m_ui.cb_Plot2.currentIndex())]
                 buffer_temp_pl[2] = buffer_temp[int(self.m_ui.cb_Plot3.currentIndex())]
@@ -480,7 +489,7 @@ class MainWindow(QMainWindow):
 
                 angle = buffer_temp[1]
                 if self.m_ui.cb_degrees.isChecked():
-                    angle /= 91
+                    angle /= 91.02222
 
 
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
@@ -523,7 +532,7 @@ class MainWindow(QMainWindow):
         if btn_id != 5:
             sbuffer[0] = self.m_ui.cb_enable.isChecked()
             sbuffer[1] = self.m_ui.cb_appMode.currentIndex()
-            sbuffer[2] = int(self.le_list[btn_id].text())
+            sbuffer[2] = int(float(self.le_list[btn_id].text()) * 91.02222)
             sbuffer[3] = self.m_ui.cb_arr.currentIndex()
 
         self.start_buffer_to_send(header)
@@ -654,7 +663,7 @@ class MainWindow(QMainWindow):
                 sbuffer[0] = int(float(self.m_ui.le_posP.text()) * 10)
                 sbuffer[1] = int(float(self.m_ui.le_posD.text()) * 10)
                 sbuffer[2] = int(float(self.m_ui.le_posSat.text()) * 1)
-                sbuffer[3] = int(float(self.m_ui.le_spP.text()) * 1000)
+                sbuffer[3] = int(float(self.m_ui.le_spP.text()) * 10000)
                 sbuffer[4] = int(float(self.m_ui.le_spI.text()) * 10000)
                 sbuffer[5] = int(float(self.m_ui.le_spSat.text()) * 10)
                 sbuffer[6] = int(self.m_ui.le_res.text())
@@ -712,7 +721,7 @@ class MainWindow(QMainWindow):
                 self.m_ui.lr_posP.setText(str(data[1]/10))
                 self.m_ui.lr_posD.setText(str(data[2] / 10))
                 self.m_ui.lr_posSat.setText(str(data[3] / 1))
-                self.m_ui.lr_spP.setText(str(data[4] / 1000))
+                self.m_ui.lr_spP.setText(str(data[4] / 10000))
                 self.m_ui.lr_spI.setText(str(data[5] / 10000))
                 self.m_ui.lr_spSat.setText(str(data[6] / 10))
                 self.m_ui.lr_res.setText(str(data[7]))
