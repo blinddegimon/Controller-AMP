@@ -457,39 +457,43 @@ class MainWindow(QMainWindow):
         self.prev_time = time.time()
 
         #print(buffer_temp)
+        new_buffer_temp = np.zeros(len(buffer_temp))
         match int(buffer_temp[0]) & 0xffff:
             case 0x8277 | 0x8280 | 0x8288 | 0x7777 | 0x7780 | 0x7788:
                 self.update_config(buffer_temp)
             case 0x6788:
                 buffer_temp_pl = [0,0,0,0,0]
 
-                buffer_temp[1] = float(buffer_temp[1] / 91.02222)
-                buffer_temp[4] = float(buffer_temp[4] / 10.0)
-                buffer_temp[5] = float(buffer_temp[5] / 10.0)
-                buffer_temp[6] = float(buffer_temp[6] / 10.0)
-                buffer_temp[10] = float(buffer_temp[10] / 10.0)
-                buffer_temp[11] = float(buffer_temp[11] / 10.0)
-                buffer_temp[12] = float(buffer_temp[12] / 10.0)
-                buffer_temp[13] = float(buffer_temp[13] / 10.0)
-                buffer_temp[17] = float(buffer_temp[17] / 91.02222)
-                buffer_temp[18] = float(buffer_temp[18] / 91.02222)
-                buffer_temp[20] = float(buffer_temp[20] / 10.0)
+                new_buffer_temp[1] = float(buffer_temp[1] / 91.02222)
+                new_buffer_temp[4] = float(buffer_temp[4] / 10.0)
+                new_buffer_temp[5] = float(buffer_temp[5] / 10.0)
+                new_buffer_temp[6] = float(buffer_temp[6] / 10.0)
+                new_buffer_temp[7] = float(buffer_temp[7] / 10.0)
+                new_buffer_temp[8] = float(buffer_temp[8] / 10.0)
+                new_buffer_temp[9] = float(buffer_temp[9] / 10.0)
+                new_buffer_temp[10] = float(buffer_temp[10] / 10.0)
+                new_buffer_temp[11] = float(buffer_temp[11] / 10.0)
+                new_buffer_temp[12] = float(buffer_temp[12] / 10.0)
+                new_buffer_temp[13] = float(buffer_temp[13] / 10.0)
+                new_buffer_temp[17] = float(buffer_temp[17] / 91.02222)
+                new_buffer_temp[18] = float(buffer_temp[18] / 91.02222)
+                new_buffer_temp[20] = float(buffer_temp[20] / 10.0)
 
-                buffer_temp_pl[0] = buffer_temp[int(self.m_ui.cb_Plot1.currentIndex())]
-                buffer_temp_pl[1] = buffer_temp[int(self.m_ui.cb_Plot2.currentIndex())]
-                buffer_temp_pl[2] = buffer_temp[int(self.m_ui.cb_Plot3.currentIndex())]
-                buffer_temp_pl[3] = buffer_temp[int(self.m_ui.cb_Plot4.currentIndex())]
-                buffer_temp_pl[4] = buffer_temp[int(self.m_ui.cb_Plot5.currentIndex())]
+                buffer_temp_pl[0] = new_buffer_temp[int(self.m_ui.cb_Plot1.currentIndex())]
+                buffer_temp_pl[1] = new_buffer_temp[int(self.m_ui.cb_Plot2.currentIndex())]
+                buffer_temp_pl[2] = new_buffer_temp[int(self.m_ui.cb_Plot3.currentIndex())]
+                buffer_temp_pl[3] = new_buffer_temp[int(self.m_ui.cb_Plot4.currentIndex())]
+                buffer_temp_pl[4] = new_buffer_temp[int(self.m_ui.cb_Plot5.currentIndex())]
 
 
                 self.plot.update_buffer_y(buffer_temp_pl)
 
                 self.prev_pos = self.pos
-                self.pos = buffer_temp[1]
+                self.pos = new_buffer_temp[1]
 
-                angle = buffer_temp[1]
+                angle = new_buffer_temp[1]
                 if self.m_ui.cb_degrees.isChecked():
-                    angle /= 91.02222
+                    angle *= 91.02222
 
 
                 self.m_ui.lr_angle.setText(str(f'{angle: .2f}'))
@@ -500,9 +504,9 @@ class MainWindow(QMainWindow):
                 #print(buffer_temp[6])
 
 
-                self.m_ui.l_PAVcc.setText(str(f'{buffer_temp[7]/10: .1f}'))
-                self.m_ui.l_NAVcc.setText(str(f'{buffer_temp[8]/10: .1f}'))
-                self.m_ui.l_5Vcc.setText(str(f'{buffer_temp[9]/10: .1f}'))
+                self.m_ui.l_PAVcc.setText(str(f'{new_buffer_temp[7]: .1f}'))
+                self.m_ui.l_NAVcc.setText(str(f'{new_buffer_temp[8]: .1f}'))
+                self.m_ui.l_5Vcc.setText(str(f'{new_buffer_temp[9]: .1f}'))
 
     def start_buffer_to_send(self, header):
         headers = [0x8849, 0x8850, 0x8949, 0x8950]
